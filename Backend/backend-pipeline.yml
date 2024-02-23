@@ -1,0 +1,25 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    echo Building and testing the backend...
+    cd backend
+    mvn clean install
+  displayName: 'Build and Test Backend'
+
+- script: |
+    echo Building and pushing Docker image for the backend...
+    docker build -t myregistry.azurecr.io/my-app-backend:$(Build.BuildId) -f Dockerfile.backend .
+    docker push myregistry.azurecr.io/my-app-backend:$(Build.BuildId)
+  displayName: 'Build and Push Docker Image for Backend'
+
+- script: |
+    echo Deploying the backend to Azure...
+    az acr login --name myregistry
+    az acr import --name myregistry --source myregistry.azurecr.io/my-app-backend:$(Build.BuildId) --image my-app-backend:$(Build.BuildId)
+    az acr show --name myregistry --query loginServer --output tsv
+  displayName: 'Deploy Backend to Azure'
