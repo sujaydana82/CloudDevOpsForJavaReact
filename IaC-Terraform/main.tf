@@ -54,7 +54,7 @@ resource "azurerm_mssql_server" "example" {
   administrator_login_password = "Password1234!"
 }
 
-resource "azurerm_sql_database" "example" {
+resource "azurerm_mssql_database" "example" {
   name                = "skd-sqldb"
   resource_group_name = "1-23dc4895-playground-sandbox"
   location            = "West Europe"
