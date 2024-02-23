@@ -3,22 +3,22 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "myResourceGroup"
+  name     = "1-23dc4895-playground-sandbox"
   location = "West Europe"
 }
 
 resource "azurerm_container_registry" "acr" {
-  name                     = "myContainerRegistry"
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
+  name                     = "skdContainerRegistry"
+  resource_group_name      = 1-23dc4895-playground-sandbox
+  location                 = "West Europe"
   sku                      = "Basic"
   admin_enabled            = true
 }
 
 resource "azurerm_app_service_plan" "plan" {
-  name                = "myAppServicePlan"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  name                = "skdAppServicePlan"
+  location            = "West Europe"
+  resource_group_name = 1-23dc4895-playground-sandbox
   kind                = "Linux"
   reserved            = true
   sku {
@@ -28,9 +28,9 @@ resource "azurerm_app_service_plan" "plan" {
 }
 
 resource "azurerm_app_service" "app" {
-  name                = "myAppService"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  name                = "skdAppService"
+  location            = "West Europe"
+  resource_group_name = 1-23dc4895-playground-sandbox
   app_service_plan_id = azurerm_app_service_plan.plan.id
   https_only          = true
 
@@ -47,17 +47,17 @@ resource "azurerm_app_service" "app" {
 }
 
 resource "azurerm_sql_server" "example" {
-  name                         = "example-sqlserver"
-  resource_group_name          = azurerm_resource_group.rg.name
-  location                     = azurerm_resource_group.rg.location
+  name                         = "skd-sqlserver"
+  resource_group_name          = 1-23dc4895-playground-sandbox
+  location                     = "West Europe"
   version                      = "12.0"
   administrator_login          = "adminuser"
   administrator_login_password = "Password1234!"
 }
 
 resource "azurerm_sql_database" "example" {
-  name                = "example-sqldb"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  server_name         = azurerm_sql_server.example.name
+  name                = "skd-sqldb"
+  resource_group_name = 1-23dc4895-playground-sandbox
+  location            = "West Europe"
+  server_name         = skd-sqlserver
 }
