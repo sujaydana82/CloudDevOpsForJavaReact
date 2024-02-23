@@ -25,10 +25,7 @@ resource "azurerm_service_plan" "plan" {
   name                = "skdAppServicePlan"
   location            = "West Europe"
   resource_group_name = "1-23dc4895-playground-sandbox"
-  kind                = "Linux"
-  reserved            = true
   sku_name            = "S1"
-  os_type             = "Linux"
 }
 
 resource "azurerm_app_service" "app" {
