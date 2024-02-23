@@ -45,7 +45,7 @@ resource "azurerm_app_service" "app" {
   }
 }
 
-resource "azurerm_sql_server" "example" {
+resource "azurerm_mssql_server" "example" {
   name                         = "skd-sqlserver"
   resource_group_name          = "1-23dc4895-playground-sandbox"
   location                     = "West Europe"
