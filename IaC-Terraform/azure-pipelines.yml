@@ -9,10 +9,10 @@ steps:
   inputs:
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     command: 'init'
-    backendServiceArm: '<Your Azure Subscription>'
-    backendAzureRmResourceGroupName: '<Your Resource Group>'
-    backendAzureRmStorageAccountName: '<Your Storage Account>'
-    backendAzureRmContainerName: '<Your Container>'
+    backendServiceArm: $(Your-Azure-Subscription)
+    backendAzureRmResourceGroupName: $(Your-Resource-Group)
+    backendAzureRmStorageAccountName: $(Your-Storage-Account)
+    backendAzureRmContainerName: $(Your-Container)
     backendAzureRmKey: 'terraform.tfstate'
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
@@ -24,11 +24,11 @@ steps:
   inputs:
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     command: 'plan'
-    environmentServiceNameAzureRM: '<Your Azure Subscription>'
+    environmentServiceNameAzureRM: $(Your-Azure-Subscription)
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
   inputs:
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     command: 'apply'
-    environmentServiceNameAzureRM: '<Your Azure Subscription>'
+    environmentServiceNameAzureRM: $(Your-Azure-Subscription)
     commandOptions: '-auto-approve'
