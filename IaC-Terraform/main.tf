@@ -2,6 +2,12 @@ provider "azurerm" {
   features {}
 }
 
+variable "image_tag" {
+  description = "The tag of the Docker image"
+  type        = string
+  default     = "latest"
+}
+
 resource "azurerm_resource_group" "rg" {
   name     = "1-23dc4895-playground-sandbox"
   location = "West Europe"
@@ -15,7 +21,7 @@ resource "azurerm_container_registry" "acr" {
   admin_enabled            = true
 }
 
-resource "azurerm_app_service_plan" "plan" {
+resource "azurerm_service_plan" "plan" {
   name                = "skdAppServicePlan"
   location            = "West Europe"
   resource_group_name = "1-23dc4895-playground-sandbox"
