@@ -21,7 +21,10 @@ resource "azurerm_app_service_plan" "plan" {
   resource_group_name = "1-23dc4895-playground-sandbox"
   kind                = "Linux"
   reserved            = true
-  sku_tier            = "Standard"
+  sku {
+    tier = "Standard"
+    size = "S1"
+  }
 }
 
 resource "azurerm_app_service" "app" {
