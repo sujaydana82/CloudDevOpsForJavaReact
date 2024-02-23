@@ -9,7 +9,7 @@ steps:
   inputs:
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     command: 'init'
-    backendServiceArm: $(Your-Azure-Subscription)
+    backendServiceArm: $(skd-Cloud-Service-Connection)
     backendAzureRmResourceGroupName: $(Your-Resource-Group)
     backendAzureRmStorageAccountName: $(Your-Storage-Account)
     backendAzureRmContainerName: $(Your-Container)
@@ -24,11 +24,11 @@ steps:
   inputs:
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     command: 'plan'
-    environmentServiceNameAzureRM: $(Your-Azure-Subscription)
+    environmentServiceNameAzureRM: $(skd-Cloud-Service-Connection)
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
   inputs:
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     command: 'apply'
-    environmentServiceNameAzureRM: $(Your-Azure-Subscription)
+    environmentServiceNameAzureRM: $(skd-Cloud-Service-Connection)
     commandOptions: '-auto-approve'
