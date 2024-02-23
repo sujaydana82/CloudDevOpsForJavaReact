@@ -15,7 +15,7 @@ resource "azurerm_container_registry" "acr" {
   admin_enabled            = true
 }
 
-resource "azurerm__app_service_plan" "plan" {
+resource "azurerm_app_service_plan" "plan" {
   name                = "skdAppServicePlan"
   location            = "West Europe"
   resource_group_name = "1-23dc4895-playground-sandbox"
