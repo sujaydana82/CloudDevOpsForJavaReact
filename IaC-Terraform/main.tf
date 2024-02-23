@@ -27,17 +27,15 @@ resource "azurerm_service_plan" "plan" {
   resource_group_name = "1-23dc4895-playground-sandbox"
   kind                = "Linux"
   reserved            = true
-  sku {
-    tier = "Standard"
-    size = "S1"
-  }
+  sku_name            = "S1"
+  os_type             = "Linux"
 }
 
 resource "azurerm_app_service" "app" {
   name                = "skdAppService"
   location            = "West Europe"
   resource_group_name = "1-23dc4895-playground-sandbox"
-  app_service_plan_id = azurerm_app_service_plan.plan.id
+  app_service_plan_id = azurerm_service_plan.plan.id
   https_only          = true
 
   site_config {
