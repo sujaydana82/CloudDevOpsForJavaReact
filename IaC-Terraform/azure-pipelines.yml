@@ -9,7 +9,7 @@ steps:
   inputs:
     workingDirectory: '$(System.DefaultWorkingDirectory)'
     command: 'init'
-    backendServiceArm: $(skd-Cloud-Service-Connection)
+    backendServiceArm: 'skd-Cloud-Service-Connection'
     backendAzureRmResourceGroupName: $(Your-Resource-Group)
     backendAzureRmStorageAccountName: $(Your-Storage-Account)
     backendAzureRmContainerName: $(Your-Container)
