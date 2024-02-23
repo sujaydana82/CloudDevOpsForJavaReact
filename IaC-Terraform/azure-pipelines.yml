@@ -7,7 +7,7 @@ pool:
 steps:
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
   inputs:
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
     command: 'init'
     backendServiceArm: 'skd-Cloud-Service-Connection'
     backendAzureRmResourceGroupName: $(Your-Resource-Group)
@@ -17,18 +17,18 @@ steps:
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
   inputs:
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
     command: 'validate'
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
   inputs:
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
     command: 'plan'
     environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
   inputs:
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
     command: 'apply'
     environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
     commandOptions: '-auto-approve'
