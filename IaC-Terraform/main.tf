@@ -21,9 +21,7 @@ resource "azurerm_app_service_plan" "plan" {
   resource_group_name = "1-23dc4895-playground-sandbox"
   kind                = "Linux"
   reserved            = true
-  sku_tier = "Standard"
-  sku_size = "S1"
-  
+  sku_tier            = "Standard"
 }
 
 resource "azurerm_app_service" "app" {
@@ -55,8 +53,6 @@ resource "azurerm_mssql_server" "example" {
 }
 
 resource "azurerm_mssql_database" "example" {
-  name                = "skd-sqldb"
-  resource_group_name = "1-23dc4895-playground-sandbox"
-  location            = "West Europe"
-  server_name         = "skd-sqlserver"
+  name       = "skd-sqldb"
+  server_id  = azurerm_mssql_server.example.id
 }
