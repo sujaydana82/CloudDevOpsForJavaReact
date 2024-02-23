@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "rg" {
 
 resource "azurerm_container_registry" "acr" {
   name                     = "skdContainerRegistry"
-  resource_group_name      = 1-23dc4895-playground-sandbox
+  resource_group_name      = "1-23dc4895-playground-sandbox"
   location                 = "West Europe"
   sku                      = "Basic"
   admin_enabled            = true
@@ -18,7 +18,7 @@ resource "azurerm_container_registry" "acr" {
 resource "azurerm_app_service_plan" "plan" {
   name                = "skdAppServicePlan"
   location            = "West Europe"
-  resource_group_name = 1-23dc4895-playground-sandbox
+  resource_group_name = "1-23dc4895-playground-sandbox"
   kind                = "Linux"
   reserved            = true
   sku {
@@ -30,7 +30,7 @@ resource "azurerm_app_service_plan" "plan" {
 resource "azurerm_app_service" "app" {
   name                = "skdAppService"
   location            = "West Europe"
-  resource_group_name = 1-23dc4895-playground-sandbox
+  resource_group_name = "1-23dc4895-playground-sandbox"
   app_service_plan_id = azurerm_app_service_plan.plan.id
   https_only          = true
 
@@ -48,7 +48,7 @@ resource "azurerm_app_service" "app" {
 
 resource "azurerm_sql_server" "example" {
   name                         = "skd-sqlserver"
-  resource_group_name          = 1-23dc4895-playground-sandbox
+  resource_group_name          = "1-23dc4895-playground-sandbox"
   location                     = "West Europe"
   version                      = "12.0"
   administrator_login          = "adminuser"
@@ -57,7 +57,7 @@ resource "azurerm_sql_server" "example" {
 
 resource "azurerm_sql_database" "example" {
   name                = "skd-sqldb"
-  resource_group_name = 1-23dc4895-playground-sandbox
+  resource_group_name = "1-23dc4895-playground-sandbox"
   location            = "West Europe"
   server_name         = skd-sqlserver
 }
