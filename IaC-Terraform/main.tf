@@ -61,3 +61,13 @@ resource "azurerm_mssql_database" "example" {
   name       = "skd-sqldb"
   server_id  = azurerm_mssql_server.example.id
 }
+
+resource "azurerm_azuread_user" "user1" {
+  display_name = "user1"
+  user_principal_name = "user1@realhandsonlabs.com"
+}
+
+resource "azurerm_azuread_user" "user2" {
+  display_name = "user2"
+  user_principal_name = "user2@realhandsonlabs.com"
+}
