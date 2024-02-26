@@ -10,13 +10,13 @@ variable "image_tag" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "1-23dc4895-playground-sandbox"
+  name     = "1-628addcf-playground-sandbox"
   location = "East US"
 }
 
 resource "azurerm_container_registry" "acr" {
   name                     = "skdContainerRegistry"
-  resource_group_name      = "1-23dc4895-playground-sandbox"
+  resource_group_name      = "1-628addcf-playground-sandbox"
   location                 = "East US"
   sku                      = "Basic"
   admin_enabled            = true
@@ -25,7 +25,7 @@ resource "azurerm_container_registry" "acr" {
 resource "azurerm_service_plan" "plan" {
   name                = "skdAppServicePlan"
   location            = "East US"
-  resource_group_name = "1-23dc4895-playground-sandbox"
+  resource_group_name = "1-628addcf-playground-sandbox"
   sku_name            = "S1"
   os_type  = "Linux"
 }
@@ -33,7 +33,7 @@ resource "azurerm_service_plan" "plan" {
 resource "azurerm_app_service" "app" {
   name                = "skdAppService"
   location            = "East US"
-  resource_group_name = "1-23dc4895-playground-sandbox"
+  resource_group_name = "1-628addcf-playground-sandbox"
   app_service_plan_id = azurerm_service_plan.plan.id
   https_only          = true
 
@@ -51,7 +51,7 @@ resource "azurerm_app_service" "app" {
 
 resource "azurerm_mssql_server" "example" {
   name                         = "skd-sqlserver"
-  resource_group_name          = "1-23dc4895-playground-sandbox"
+  resource_group_name          = "1-628addcf-playground-sandbox"
   location                     = "East US"
   version                      = "12.0"
   administrator_login          = "adminuser"
