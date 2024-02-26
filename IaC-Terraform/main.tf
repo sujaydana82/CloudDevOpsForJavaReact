@@ -8,11 +8,10 @@ variable "image_tag" {
   type        = string
   default     = "latest"
 }
-
-resource "azurerm_resource_group" "rg" {
-  name     = "1-628addcf-playground-sandbox"
-  location = "West US"
-}
+//resource "azurerm_resource_group" "rg" {
+  //name     = "1-628addcf-playground-sandbox"
+  //location = "West US"
+//}
 
 resource "azurerm_container_registry" "acr" {
   name                     = "skdContainerRegistry"
