@@ -6,6 +6,4 @@ output "app_service_plan_id" {
   value = azurerm_app_service_plan.plan.id
 }
 
-output "resource_group_location" {
-  value = azurerm_resource_group.rg.location
-}
+
