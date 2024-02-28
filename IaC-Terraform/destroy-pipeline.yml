@@ -41,4 +41,7 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
     command: 'destroy'
     environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
+    backendAzureRmStorageAccountName: $(storage_account_name)
+    backendAzureRmContainerName: $(container_name)
+    backendAzureRmKey: 'terraform.tfstate'
     commandOptions: '-auto-approve'
