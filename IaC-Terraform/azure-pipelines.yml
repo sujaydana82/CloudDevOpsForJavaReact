@@ -17,11 +17,10 @@ steps:
 
 - script: |
     # Import existing Azure resources into Terraform state
-    cd /home/vsts/work/1/s 
-    terraform import azurerm_container_registry.acr /subscriptions/80ea84e8-afce-4851-928a-9e2219724c69/resourceGroups/1-fb9bbcf4-playground-sandbox/providers/Microsoft.ContainerRegistry/registries/skdContainerRegistry
-    terraform import azurerm_service_plan.plan /subscriptions/80ea84e8-afce-4851-928a-9e2219724c69/resourceGroups/1-fb9bbcf4-playground-sandbox/providers/Microsoft.Web/serverFarms/skdAppServicePlan
-    terraform import azurerm_mssql_server.example /subscriptions/80ea84e8-afce-4851-928a-9e2219724c69/resourceGroups/1-fb9bbcf4-playground-sandbox/providers/Microsoft.Sql/servers/skd-sqlserver
-  displayName: 'Import existing Azure resources into Terraform state'
+    terraform -chdir=/home/vsts/work/1/s import azurerm_container_registry.acr /subscriptions/80ea84e8-afce-4851-928a-9e2219724c69/resourceGroups/1-fb9bbcf4-playground-sandbox/providers/Microsoft.ContainerRegistry/registries/skdContainerRegistry
+    terraform -chdir=/home/vsts/work/1/s import azurerm_service_plan.plan /subscriptions/80ea84e8-afce-4851-928a-9e2219724c69/resourceGroups/1-fb9bbcf4-playground-sandbox/providers/Microsoft.Web/serverFarms/skdAppServicePlan
+    terraform -chdir=/home/vsts/work/1/s import azurerm_mssql_server.example /subscriptions/80ea84e8-afce-4851-928a-9e2219724c69/resourceGroups/1-fb9bbcf4-playground-sandbox/providers/Microsoft.Sql/servers/skd-sqlserver
+  displayName: 'Import existing Azure resources into Terraform state
 
 - script: |
     # Initialize Terraform
