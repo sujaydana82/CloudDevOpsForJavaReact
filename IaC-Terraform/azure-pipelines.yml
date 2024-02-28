@@ -19,6 +19,7 @@ stages:
         command: 'init'
         backendServiceArm: 'skd-Cloud-Service-Connection'
         commandOptions: '-var="environment=dev"'
+        backendAzureRmStorageAccountName: 'skdstorageaccount'
         backendAzureRmKey: 'terraform-dev.tfstate'
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
