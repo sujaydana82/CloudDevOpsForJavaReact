@@ -19,76 +19,12 @@ variable "sku_name" {
   default     = "S1"
 }
 
-# Dev Env variables
-}
-variable "admin_usernam_dev" {
+variable "admin_username" {
   description = "The admin username for the Azure resources"
   type        = string
   #Replace 'your_admin_username' with the desired admin username
-  default     = "adminuser_dev"
+  default     = "adminuser"
 }
-
-variable "admin_password_dev" {
-  description = "The admin password for the Azure resources"
-  type        = string
-  #Replace 'your_admin_password' with the desired admin password
-  default     = "Password1234!"
-}
-
-
-variable "storage_account_name_dev" {
-  description = "The name of the storage account"
-  type        = string
-  # Replace 'your_storage_account' with the desired storage account name
-  default     = "skdstorageaccountdev"
-}
-
-variable "container_name_dev" {
-  description = "The name of the storage account"
-  type        = string
-  # Replace 'your_container' with the desired container name
-  default     = "skdscontainerdev"
-}
-
-# Acc Env variables
-}
-variable "admin_usernam_acc" {
-  description = "The admin username for the Azure resources"
-  type        = string
-  #Replace 'your_admin_username' with the desired admin username
-  default     = "adminuser_acc"
-}
-
-variable "admin_password_acc" {
-  description = "The admin password for the Azure resources"
-  type        = string
-  #Replace 'your_admin_password' with the desired admin password
-  default     = "Password1234!"
-}
-
-
-variable "storage_account_name_acc" {
-  description = "The name of the storage account"
-  type        = string
-  # Replace 'your_storage_account' with the desired storage account name
-  default     = "skdstorageaccountacc"
-}
-
-variable "container_name_acc" {
-  description = "The name of the storage account"
-  type        = string
-  # Replace 'your_container' with the desired container name
-  default     = "skdscontaineracc"
-}
-
-variable "admin_username_acc" {
-  description = "The admin username for the Azure resources"
-  type        = string
-  #Replace 'your_admin_username' with the desired admin username
-  default     = "adminuser_acc"
-}
-
-# Prd Env variables
 
 variable "admin_password" {
   description = "The admin password for the Azure resources"
@@ -96,7 +32,39 @@ variable "admin_password" {
   #Replace 'your_admin_password' with the desired admin password
   default     = "Password1234!"
 }
+# Dev Env variables
 
+variable "storage_account_name_dev" {
+  description = "The name of the dev storage account"
+  type        = string
+  # Replace 'your_storage_account' with the desired storage account name
+  default     = "skdstorageaccountdev"
+}
+
+variable "container_name_dev" {
+  description = "The name of the dev container"
+  type        = string
+  # Replace 'your_container' with the desired container name
+  default     = "skdscontainerdev"
+}
+
+# Acc Env variables
+
+variable "storage_account_name_acc" {
+  description = "The name of the acc storage account"
+  type        = string
+  # Replace 'your_storage_account' with the desired storage account name
+  default     = "skdstorageaccountacc"
+}
+
+variable "container_name_acc" {
+  description = "The name of the acc container"
+  type        = string
+  # Replace 'your_container' with the desired container name
+  default     = "skdscontaineracc"
+}
+
+# Prd Env variables
 
 variable "storage_account_name" {
   description = "The name of the storage account"
