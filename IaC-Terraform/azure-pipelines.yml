@@ -1,38 +1,44 @@
+variables:
+  resource_group_name: $[ variables['resource_group_name'] ]
+  storage_account_name: $[ variables['storage_account_name'] ]
+  container_name: $[ variables['container_name'] ]
+
 trigger:
 - none
 
 pool:
   vmImage: 'ubuntu-latest'
 
+steps:
 
-stages:
-- stage: Dev
-  displayName: 'Deploy to Dev Environment'
-  jobs:
-  - job: Dev_Deployment
-    displayName: 'Deploy to Dev'
-    steps:
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-      displayName: 'Initialize Terraform'
-      inputs:
-        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
-        command: 'init'
-        backendServiceArm: 'skd-Cloud-Service-Connection'
-        commandOptions: '-var="environment=dev"'
-        backendAzureRmStorageAccountName: 'skdstorageaccount'
-        backendAzureRmContainerName: 'skdscontainerdev'
-        backendAzureRmKey: 'terraform-dev.tfstate'
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+  displayName: 'Initialize Terraform'
+  inputs:
+    workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+    command: 'init'
+    backendServiceArm: 'skd-Cloud-Service-Connection'
+    backendAzureRmResourceGroupName: $(resource_group_name)
+    backendAzureRmStorageAccountName: $(Your-Storage-Account)
+    backendAzureRmContainerName: $(Your-Container)
+    backendAzureRmKey: 'terraform.tfstate'
 
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-      displayName: 'Terraform Plan for Dev Environment'
-      inputs:
-        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
-        command: 'plan'
-        
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+  displayName: 'Validate Terraform Configuration'
+  inputs:
+    workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+    command: 'validate'
 
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-      displayName: 'Apply Terraform Configuration for Dev Environment'
-      inputs:
-        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
-        command: 'apply'
-        
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+  displayName: 'Generate Terraform Plan'
+  inputs:
+    workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
+
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+  displayName: 'Apply Terraform Plan'
+  inputs:
+    workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
+    commandOptions: '-auto-approve'
