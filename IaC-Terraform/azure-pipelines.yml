@@ -1,24 +1,3 @@
-variables:
-  resource_group_name: $[ variables['resource_group_name'] ]
-  location: $[ variables['location'] ]
-  
-  storage_account_name_dev: $[ variables['storage_account_name_dev'] ]
-  storage_account_name_acc: $[ variables['storage_account_name_acc'] ]
-  storage_account_name: $[ variables['storage_account_name'] ]
-  
-  container_name_dev: $[ variables['container_name'] ]
-  container_name_acc: $[ variables['container_name'] ]
-  container_name: $[ variables['container_name'] ]
-  
-  admin_username: $[ variables['admin_username'] ]
-  admin_password: $[ variables['admin_password'] ]
-
-trigger:
-- none
-
-pool:
-  vmImage: 'ubuntu-latest'
-
 stages:
 - stage: Dev
   displayName: 'Deploy to Dev Environment'
@@ -26,11 +5,14 @@ stages:
   - job: Dev_Deployment
     displayName: 'Deploy to Dev'
     steps:
-    - script: |
-        echo "Deploying to Dev Environment"
-        terraform init
-        terraform plan -var="resource_group_name=${{ variables['resource_group_name'] }}" -var="location=${{ variables['location'] }}" -var="admin_username=${{ variables['admin_username'] }}" -var="admin_password=${{ variables['admin_password'] }}" -var="environment=dev"
-        terraform apply -auto-approve -var="resource_group_name=${{ variables['resource_group_name'] }}" -var="location=${{ variables['location'] }}" -var="admin_username=${{ variables['admin_username'] }}" -var="admin_password=${{ variables['admin_password'] }}" -var="environment=dev"
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+      displayName: 'Deploy to Dev Environment'
+      inputs:
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        command: 'apply'
+        environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
+        commandOptions: '-auto-approve -var="environment=dev"'
+        backendAzureRmKey: 'terraform-dev.tfstate'
 
 - stage: Acc
   displayName: 'Deploy to Acc Environment'
@@ -38,11 +20,14 @@ stages:
   - job: Acc_Deployment
     displayName: 'Deploy to Acc'
     steps:
-    - script: |
-        echo "Deploying to Acc Environment"
-        terraform init
-        terraform plan -var="resource_group_name=$(resource_group_name)" -var="location=$(location)" -var="admin_username=$(admin_username)" -var="admin_password=$(admin_password)" -var="environment=acc"
-        terraform apply -auto-approve -var="resource_group_name=$(resource_group_name)" -var="location=$(location)" -var="admin_username=$(admin_username)" -var="admin_password=$(admin_password)" -var="environment=acc"
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+      displayName: 'Deploy to Acc Environment'
+      inputs:
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        command: 'apply'
+        environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
+        commandOptions: '-auto-approve -var="environment=acc"'
+        backendAzureRmKey: 'terraform-acc.tfstate'
 
 - stage: Prd
   displayName: 'Deploy to Prd Environment'
@@ -50,8 +35,11 @@ stages:
   - job: Prd_Deployment
     displayName: 'Deploy to Prd'
     steps:
-    - script: |
-        echo "Deploying to Prd Environment"
-        terraform init
-        terraform plan -var="resource_group_name=$(resource_group_name)" -var="location=$(location)" -var="admin_username=$(admin_username)" -var="admin_password=$(admin_password)" -var="environment=prd"
-        terraform apply -auto-approve -var="resource_group_name=$(resource_group_name)" -var="location=$(location)" -var="admin_username=$(admin_username)" -var="admin_password=$(admin_password)" -var="environment=prd"
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+      displayName: 'Deploy to Prd Environment'
+      inputs:
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        command: 'apply'
+        environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
+        commandOptions: '-auto-approve -var="environment=prd"'
+        backendAzureRmKey: 'terraform-prd.tfstate'
