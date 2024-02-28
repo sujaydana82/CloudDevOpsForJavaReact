@@ -18,8 +18,8 @@ steps:
     command: 'init'
     backendServiceArm: 'skd-Cloud-Service-Connection'
     backendAzureRmResourceGroupName: $(resource_group_name)
-    backendAzureRmStorageAccountName: $(Your-Storage-Account)
-    backendAzureRmContainerName: $(Your-Container)
+    backendAzureRmStorageAccountName: $(storage_account_name)
+    backendAzureRmContainerName: $(container_name)
     backendAzureRmKey: 'terraform.tfstate'
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
