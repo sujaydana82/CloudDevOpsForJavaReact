@@ -1,10 +1,3 @@
-variable "Your-Azure-Subscription" {
-  description = "The name of the Azure subscription"
-  type        = string
-  # Replace 'Your_Azure_Subscription' with the desired Azure subscription
-  default     = "P6-Real Hands-On Labs"
-}
-
 variable "resource_group_name" {
   description = "The name of the Azure resource group"
   type        = string
@@ -46,14 +39,14 @@ variable "Your-Storage-Account" {
   default     = "skdstorageaccount"
 }
 
-variable "Your-Storage-Account" {
+variable "storage_account_name" {
   description = "The name of the storage account"
   type        = string
   # Replace 'your_storage_account' with the desired storage account name
   default     = "skdstorageaccount"
 }
 
-variable "Your-Container" {
+variable "container_name" {
   description = "The name of the storage account"
   type        = string
   # Replace 'your_container' with the desired container name
