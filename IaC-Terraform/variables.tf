@@ -2,7 +2,7 @@ variable "resource_group_name" {
   description = "The name of the Azure resource group"
   type        = string
   # Replace 'your_resource_group_name' with the desired resource group name
-  default     = "1-de8f2c04-playground-sandbox"
+  default     = "1-fb9bbcf4-playground-sandbox"
 }
 
 variable "location" {
