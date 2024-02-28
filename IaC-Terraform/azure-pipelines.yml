@@ -1,3 +1,10 @@
+trigger:
+- none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+
 stages:
 - stage: Dev
   displayName: 'Deploy to Dev Environment'
@@ -6,40 +13,26 @@ stages:
     displayName: 'Deploy to Dev'
     steps:
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-      displayName: 'Deploy to Dev Environment'
+      displayName: 'Initialize Terraform'
+      inputs:
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        command: 'init'
+        environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
+
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+      displayName: 'Terraform Plan for Dev Environment'
+      inputs:
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        command: 'plan'
+        environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
+        commandOptions: '-var="environment=dev"'
+        backendAzureRmKey: 'terraform-dev.tfstate'
+
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+      displayName: 'Apply Terraform Configuration for Dev Environment'
       inputs:
         workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
         command: 'apply'
         environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
         commandOptions: '-auto-approve -var="environment=dev"'
         backendAzureRmKey: 'terraform-dev.tfstate'
-
-- stage: Acc
-  displayName: 'Deploy to Acc Environment'
-  jobs:
-  - job: Acc_Deployment
-    displayName: 'Deploy to Acc'
-    steps:
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-      displayName: 'Deploy to Acc Environment'
-      inputs:
-        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
-        command: 'apply'
-        environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
-        commandOptions: '-auto-approve -var="environment=acc"'
-        backendAzureRmKey: 'terraform-acc.tfstate'
-
-- stage: Prd
-  displayName: 'Deploy to Prd Environment'
-  jobs:
-  - job: Prd_Deployment
-    displayName: 'Deploy to Prd'
-    steps:
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
-      displayName: 'Deploy to Prd Environment'
-      inputs:
-        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
-        command: 'apply'
-        environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
-        commandOptions: '-auto-approve -var="environment=prd"'
-        backendAzureRmKey: 'terraform-prd.tfstate'
