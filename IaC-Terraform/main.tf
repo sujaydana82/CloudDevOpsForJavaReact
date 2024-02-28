@@ -48,7 +48,40 @@ resource "azurerm_app_service" "app" {
   }
 }
 
-resource "azurerm_mssql_server" "example" {
+# DEV ENV
+resource "azurerm_mssql_server" "dev" {
+  name                         = "skd-sqlserverdev"
+  resource_group_name          = var.resource_group_name
+  location                     = var.location
+  version                      = "12.0"
+  administrator_login          = var.admin_username
+  administrator_login_password = var.admin_password
+}
+
+resource "azurerm_mssql_database" "dev" {
+  name       = "skd-sqldbdev"
+  server_id  = azurerm_mssql_server.dev.id
+}
+
+# ACC ENV
+resource "azurerm_mssql_server" "acc" {
+  name                         = "skd-sqlserveracc"
+  resource_group_name          = var.resource_group_name
+  location                     = var.location
+  version                      = "12.0"
+  administrator_login          = var.admin_username
+  administrator_login_password = var.admin_password
+}
+
+resource "azurerm_mssql_database" "acc" {
+  name       = "skd-sqldbacc"
+  server_id  = azurerm_mssql_server.acc.id
+}
+
+
+
+#PRD ENV
+resource "azurerm_mssql_server" "prd" {
   name                         = "skd-sqlserver"
   resource_group_name          = var.resource_group_name
   location                     = var.location
@@ -57,7 +90,7 @@ resource "azurerm_mssql_server" "example" {
   administrator_login_password = var.admin_password
 }
 
-resource "azurerm_mssql_database" "example" {
+resource "azurerm_mssql_database" "prd" {
   name       = "skd-sqldb"
-  server_id  = azurerm_mssql_server.example.id
+  server_id  = azurerm_mssql_server.prd.id
 }
