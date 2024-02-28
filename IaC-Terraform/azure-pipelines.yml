@@ -1,3 +1,8 @@
+variables:
+  resource_group_name: $[ variables['resource_group_name'] ]
+  storage_account_name: $[ variables['storage_account_name'] ]
+  container_name: $[ variables['container_name'] ]
+
 trigger:
 - none
 
@@ -12,7 +17,7 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
     command: 'init'
     backendServiceArm: 'skd-Cloud-Service-Connection'
-    backendAzureRmResourceGroupName: $(Your-Resource-Group)
+    backendAzureRmResourceGroupName: $(resource_group_name)
     backendAzureRmStorageAccountName: $(Your-Storage-Account)
     backendAzureRmContainerName: $(Your-Container)
     backendAzureRmKey: 'terraform.tfstate'
