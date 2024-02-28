@@ -18,7 +18,7 @@ steps:
     command: 'init'
     backendServiceArm: 'skd-Cloud-Service-Connection'
     backendAzureRmResourceGroupName: $(resource_group_name)
-    backendAzureRmStorageAccountName: $(Your-Storage-Account)
+    backendAzureRmStorageAccountName: $(storage_account_name)
     backendAzureRmContainerName: $(Your-Container)
     backendAzureRmKey: 'terraform.tfstate'
 
