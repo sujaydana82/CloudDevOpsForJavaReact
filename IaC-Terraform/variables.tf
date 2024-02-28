@@ -2,7 +2,7 @@ variable "resource_group_name" {
   description = "The name of the Azure resource group"
   type        = string
   # Replace 'your_resource_group_name' with the desired resource group name
-  default     = "1-fb9bbcf4-playground-sandbox"
+  default     = "1-de8f2c04-playground-sandbox"
 }
 
 variable "location" {
@@ -18,7 +18,6 @@ variable "sku_name" {
   # Replace 'your_sku_name' with the desired SKU name (e.g., S1, P1)
   default     = "S1"
 }
-
 variable "admin_username" {
   description = "The admin username for the Azure resources"
   type        = string
@@ -32,37 +31,3 @@ variable "admin_password" {
   #Replace 'your_admin_password' with the desired admin password
   default     = "Password1234!"
 }
-
-variable "storage_account_name" {
-  description = "The name of the dev storage account"
-  type        = string
-  # Replace 'your_storage_account' with the desired storage account name
-  default     = "skdstorageaccount"
-}
-
-# Dev Env variables
-variable "container_name_dev" {
-  description = "The name of the dev container"
-  type        = string
-  # Replace 'your_container' with the desired container name
-  default     = "skdscontainerdev"
-}
-
-# Acc Env variables
-variable "container_name_acc" {
-  description = "The name of the acc container"
-  type        = string
-  # Replace 'your_container' with the desired container name
-  default     = "skdscontaineracc"
-}
-
-# Prd Env variables
-
-variable "container_name" {
-  description = "The name of the storage account"
-  type        = string
-  # Replace 'your_container' with the desired container name
-  default     = "skdscontainer"
-}
-
-
