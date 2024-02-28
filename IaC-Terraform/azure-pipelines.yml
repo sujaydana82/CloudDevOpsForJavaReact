@@ -17,22 +17,21 @@ stages:
       inputs:
         workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
         command: 'init'
-        environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
+        backendServiceArm: 'skd-Cloud-Service-Connection'
+        backendAzureRmKey: 'terraform.tfstate'
+        commandOptions: '-var="environment=dev"'
+        backendAzureRmKey: 'terraform-dev.tfstate'
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
       displayName: 'Terraform Plan for Dev Environment'
       inputs:
         workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
         command: 'plan'
-        environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
-        commandOptions: '-var="environment=dev"'
-        backendAzureRmKey: 'terraform-dev.tfstate'
+        
 
     - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
       displayName: 'Apply Terraform Configuration for Dev Environment'
       inputs:
         workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
         command: 'apply'
-        environmentServiceNameAzureRM: 'skd-Cloud-Service-Connection'
-        commandOptions: '-auto-approve -var="environment=dev"'
-        backendAzureRmKey: 'terraform-dev.tfstate'
+        
