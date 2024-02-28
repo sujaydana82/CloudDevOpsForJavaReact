@@ -18,7 +18,6 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
         command: 'init'
         backendServiceArm: 'skd-Cloud-Service-Connection'
-        backendAzureRmKey: 'terraform.tfstate'
         commandOptions: '-var="environment=dev"'
         backendAzureRmKey: 'terraform-dev.tfstate'
 
