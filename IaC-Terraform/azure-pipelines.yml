@@ -29,8 +29,8 @@ stages:
     - script: |
         echo "Deploying to Dev Environment"
         terraform init
-        terraform plan -var="resource_group_name=$(resource_group_name)" -var="location=$(location)" -var="admin_username=$(admin_username)" -var="admin_password=$(admin_password)" -var="environment=dev"
-        terraform apply -auto-approve -var="resource_group_name=$(resource_group_name)" -var="location=$(location)" -var="admin_username=$(admin_username)" -var="admin_password=$(admin_password)" -var="environment=dev"
+        terraform plan -var="resource_group_name=${{ variables.resource_group_name }}" -var="location=${{ variables.location }}" -var="admin_username=${{ variables.admin_username }}" -var="admin_password=${{ variables.admin_password }}" -var="environment=dev"
+        terraform apply -auto-approve -var="resource_group_name=${{ variables.resource_group_name }}" -var="location=${{ variables.location }}" -var="admin_username=${{ variables.admin_username }}" -var="admin_password=${{ variables.admin_password }}" -var="environment=dev"
 
 - stage: Acc
   displayName: 'Deploy to Acc Environment'
