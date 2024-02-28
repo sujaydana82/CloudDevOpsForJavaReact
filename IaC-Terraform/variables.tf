@@ -21,11 +21,13 @@ variable "sku_name" {
 variable "admin_username" {
   description = "The admin username for the Azure resources"
   type        = string
+  #Replace 'your_admin_username' with the desired admin username
   default     = "adminuser"
 }
 
 variable "admin_password" {
   description = "The admin password for the Azure resources"
   type        = string
+  #Replace 'your_admin_password' with the desired admin password
   default     = "Password1234!"
 }
