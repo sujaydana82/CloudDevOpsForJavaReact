@@ -41,7 +41,7 @@ stages:
     - script: |
         echo "Deploying to Acc Environment"
         terraform init
-        terraform plan -var="resource_group_name=$(resourceGroupName)" -var="location=$(location)" -var="admin_username=$(admin_username)" -var="admin_password=$(admin_password)" -var="environment=acc"
+        terraform plan -var="resource_group_name=$(resource_group_name)" -var="location=$(location)" -var="admin_username=$(admin_username)" -var="admin_password=$(admin_password)" -var="environment=acc"
         terraform apply -auto-approve -var="resource_group_name=$(resourceGroupName)" -var="location=$(location)" -var="admin_username=$(admin_username)" -var="admin_password=$(admin_password)" -var="environment=acc"
 
 - stage: Prd
@@ -53,5 +53,5 @@ stages:
     - script: |
         echo "Deploying to Prd Environment"
         terraform init
-        terraform plan -var="resource_group_name=$(resourceGroupName)" -var="location=$(location)" -var="admin_username=$(admin_username)" -var="admin_password=$(admin_password)" -var="environment=prd"
+        terraform plan -var="resource_group_name=$(resource_group_name)" -var="location=$(location)" -var="admin_username=$(admin_username)" -var="admin_password=$(admin_password)" -var="environment=prd"
         terraform apply -auto-approve -var="resource_group_name=$(resourceGroupName)" -var="location=$(location)" -var="admin_username=$(adminUsername)" -var="admin_username=$(admin_username)" -var="admin_password=$(admin_password)" -var="environment=prd"
