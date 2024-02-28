@@ -32,15 +32,15 @@ variable "admin_password" {
   #Replace 'your_admin_password' with the desired admin password
   default     = "Password1234!"
 }
-# Dev Env variables
 
-variable "storage_account_name_dev" {
+variable "storage_account_name" {
   description = "The name of the dev storage account"
   type        = string
   # Replace 'your_storage_account' with the desired storage account name
-  default     = "skdstorageaccountdev"
+  default     = "skdstorageaccount"
 }
 
+# Dev Env variables
 variable "container_name_dev" {
   description = "The name of the dev container"
   type        = string
@@ -49,14 +49,6 @@ variable "container_name_dev" {
 }
 
 # Acc Env variables
-
-variable "storage_account_name_acc" {
-  description = "The name of the acc storage account"
-  type        = string
-  # Replace 'your_storage_account' with the desired storage account name
-  default     = "skdstorageaccountacc"
-}
-
 variable "container_name_acc" {
   description = "The name of the acc container"
   type        = string
@@ -65,13 +57,6 @@ variable "container_name_acc" {
 }
 
 # Prd Env variables
-
-variable "storage_account_name" {
-  description = "The name of the storage account"
-  type        = string
-  # Replace 'your_storage_account' with the desired storage account name
-  default     = "skdstorageaccount"
-}
 
 variable "container_name" {
   description = "The name of the storage account"
