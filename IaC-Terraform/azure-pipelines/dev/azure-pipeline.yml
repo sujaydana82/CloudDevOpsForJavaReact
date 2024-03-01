@@ -30,17 +30,17 @@ stages:
           terraform apply -var-file=C:\Projects\CloudDevOpsForJavaReact\IaC-Terraform\dev.tfvars -auto-approve
     
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(System.DefaultWorkingDirectory)/.tf/app_service/*.tfstate'
-    artifact: 'tfstateFiles'
-    publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(System.DefaultWorkingDirectory)/.tf/app_service/*.tfstate'
+            artifact: 'tfstateFiles'
+            publishLocation: 'pipeline'
 
-- task: AzureFileCopy@4
-  inputs:
-    SourcePath: '$(System.DefaultWorkingDirectory)/.tf/app_service/*.tfstate'
-    azureSubscription: '$(Service-Connection)'
-    Destination: 'AzureBlob'
-    storage: '$(storage_account_name)'  # Use the storage account name from Terraform
-    ContainerName: '$(container_name)'  # Use the container name from Terraform
-    BlobPrefix: 'tfstateFiles/'
+    - task: AzureFileCopy@4
+      inputs:
+        SourcePath: '$(System.DefaultWorkingDirectory)/.tf/app_service/*.tfstate'
+        azureSubscription: '$(Service-Connection)'
+        Destination: 'AzureBlob'
+        storage: '$(storage_account_name)'  # Use the storage account name from Terraform
+        ContainerName: '$(container_name)'  # Use the container name from Terraform
+        BlobPrefix: 'tfstateFiles/'
