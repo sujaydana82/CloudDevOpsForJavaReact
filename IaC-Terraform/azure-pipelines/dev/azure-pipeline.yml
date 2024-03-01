@@ -31,10 +31,10 @@ stages:
     
 
     - task: PublishPipelineArtifact@1
-          inputs:
-            targetPath: '$(System.DefaultWorkingDirectory)/.tf/app_service/*.tfstate'
-            artifact: 'tfstateFiles'
-            publishLocation: 'pipeline'
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/.tf/app_service/*.tfstate'
+        artifact: 'tfstateFiles'
+        publishLocation: 'pipeline'
 
     - task: AzureFileCopy@4
       inputs:
