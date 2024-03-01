@@ -21,6 +21,7 @@ public class Employee {
 	private @Version @JsonIgnore Long version;
 
 	private @ManyToOne Manager manager;
+public Employee(){}
 
 	public Employee(String firstName, String lastName, String description, Manager manager) { // <2>
 		this.firstName = firstName;

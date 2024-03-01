@@ -21,9 +21,9 @@ stages:
 
     - script: |
       choco install terraform
-    displayName: Install Terraform
+    displayName: 'Install Terraform'
 
-
+  
     - task: AzureCLI@2
       inputs:
         azureSubscription: $(service-connection)
@@ -47,6 +47,6 @@ stages:
         SourcePath: '$(System.DefaultWorkingDirectory)/.tf/app_service/*.tfstate'
         azureSubscription: '$(Service-Connection)'
         Destination: 'AzureBlob'
-        storage: '$(storage_account_name)'  # Use the storage account name from Terraform
-        ContainerName: '$(container_name)'  # Use the container name from Terraform
+        storage: '$(storage_account_name)'  
+        ContainerName: '$(container_name)'  
         BlobPrefix: 'tfstateFiles/'
