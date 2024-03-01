@@ -30,10 +30,10 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          cd $(System.DefaultWorkingDirectory)/..
+          cd $(System.DefaultWorkingDirectory)/IaC-Terraform
           terraform init
-          terraform plan -var-file=IaC-Terraform/dev.tfvars
-          terraform apply -var-file=IaC-Terraform/dev.tfvars -auto-approve
+          terraform plan -var-file=dev.tfvars
+          terraform apply -var-file=dev.tfvars -auto-approve
     
 
     - task: PublishPipelineArtifact@1
