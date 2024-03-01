@@ -25,15 +25,21 @@ stages:
         terraformVersion: '1.7.4'
         
     - task: AzureCLI@2
-      inputs:
-        azureSubscription: $(service-connection)
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          cd $(System.DefaultWorkingDirectory)/IaC-Terraform
-          terraform init
-          terraform plan -var-file=dev.tfvars
-          terraform apply -var-file=dev.tfvars -auto-approve
+  inputs:
+    azureSubscription: $(service-connection)
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      cd $(System.DefaultWorkingDirectory)/IaC-Terraform
+      ls -la  # List files in the directory for debugging
+      if [ -f dev.tfvars ]; then
+        terraform init
+        terraform plan -var-file=dev.tfvars
+        terraform apply -var-file=dev.tfvars -auto-approve
+      else
+        echo "dev.tfvars file not found. Please make sure the file exists in the directory."
+        exit 1
+      fi
     
 
     - task: PublishPipelineArtifact@1
