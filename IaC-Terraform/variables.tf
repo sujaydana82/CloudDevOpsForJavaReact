@@ -1,6 +1,6 @@
 variable "resource_group_name" {
   type    = string
-  default = "1-a7b1fb6b-playground-sandbox"
+  default = "myresourcegroup"
 }
 
 variable "location" {
@@ -10,40 +10,40 @@ variable "location" {
 
 variable "storage_account_name" {
   type    = string
-  default = "skdstorageaccount"
+  default = "mystorageaccount"
 }
 
 variable "container_name" {
   type    = string
-  default = "skdcontainer"
+  default = "mycontainer"
 }
 
 variable "app_service_name" {
   type    = string
-  default = "skdappservice"
+  default = "myappservice"
 }
 
 variable "app_service_plan_name" {
   type    = string
-  default = "skdappserviceplan"
+  default = "myappserviceplan"
 }
 
 variable "container_registry_name" {
   type    = string
-  default = "skdcontainerregistry"
+  default = "mycontainerregistry"
 }
 
 variable "sql_server_name" {
   type    = string
-  default = "skddbserver"
+  default = "mydbserver"
 }
 
 variable "sql_database_name" {
   type    = string
-  default = "skddatabase"
+  default = "mydatabase"
 }
 
 variable "app_insights_name" {
   type    = string
-  default = "skdappinsights"
+  default = "myappinsights"
 }
