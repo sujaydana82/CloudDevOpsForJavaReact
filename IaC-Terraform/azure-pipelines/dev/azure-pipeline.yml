@@ -28,13 +28,12 @@ stages:
           terraform init
           terraform plan -var-file=C:\Projects\CloudDevOpsForJavaReact\IaC-Terraform\dev.tfvars
           terraform apply -var-file=C:\Projects\CloudDevOpsForJavaReact\IaC-Terraform\dev.tfvars -auto-approve
-    
 
     - task: PublishPipelineArtifact@1
-          inputs:
-            targetPath: '$(System.DefaultWorkingDirectory)/.tf/app_service/*.tfstate'
-            artifact: 'tfstateFiles'
-            publishLocation: 'pipeline'
+      inputs:
+        targetPath: '$(System.DefaultWorkingDirectory)/.tf/app_service/*.tfstate'
+        artifact: 'tfstateFiles'
+        publishLocation: 'pipeline'
 
     - task: AzureFileCopy@4
       inputs:
