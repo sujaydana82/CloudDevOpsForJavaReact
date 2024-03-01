@@ -18,6 +18,15 @@ stages:
       inputs:
         versionSpec: '3.x'
         addToPath: true
+
+    - script: |
+        $url = "https://releases.hashicorp.com/terraform/0.12.29/terraform_0.12.29_windows_amd64.zip"
+        $output = "$(Agent.ToolsDirectory)\terraform.zip"
+        Invoke-WebRequest -Uri $url -OutFile $output
+        Expand-Archive -Path $output -DestinationPath $(Agent.ToolsDirectory)
+        $env:Path += ";$(Agent.ToolsDirectory)\terraform"
+      displayName: 'Install Terraform'
+
     - task: AzureCLI@2
       inputs:
         azureSubscription: $(service-connection)
