@@ -1,8 +1,14 @@
+variables:
+  resource_group_name: $[ variables['resource_group_name'] ]
+  storage_account_name: $[ variables['storage_account_name'] ]
+  container_name: $[ variables['container_name'] ]
+
 trigger:
 - none
 
 pool:
   vmImage: 'ubuntu-latest'
+
 
 steps:
 
@@ -12,9 +18,9 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
     command: 'init'
     backendServiceArm: 'skd-Cloud-Service-Connection'
-    backendAzureRmResourceGroupName: $(Your-Resource-Group)
-    backendAzureRmStorageAccountName: $(Your-Storage-Account)
-    backendAzureRmContainerName: $(Your-Container)
+    backendAzureRmResourceGroupName: $(resource_group_name)
+    backendAzureRmStorageAccountName: $(storage_account_name)
+    backendAzureRmContainerName: $(container_name)
     backendAzureRmKey: 'terraform.tfstate'
 
 - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0

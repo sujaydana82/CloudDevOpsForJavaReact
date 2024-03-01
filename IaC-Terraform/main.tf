@@ -9,30 +9,30 @@ variable "image_tag" {
   default     = "latest"
 }
 //resource "azurerm_resource_group" "rg" {
-  //name     = "1-6fcd71ce-playground-sandbox"
-  //location = "West US"
+  //name     = var.resource_group_name
+  //location = var.location
 //}
 
 resource "azurerm_container_registry" "acr" {
   name                     = "skdContainerRegistry"
-  resource_group_name      = "1-6fcd71ce-playground-sandbox"
-  location                 = "West US"
+  resource_group_name      = var.resource_group_name
+  location                 = var.location
   sku                      = "Basic"
   admin_enabled            = true
 }
 
 resource "azurerm_service_plan" "plan" {
   name                = "skdAppServicePlan"
-  location            = "West US"
-  resource_group_name = "1-6fcd71ce-playground-sandbox"
+  location            = var.location
+  resource_group_name = var.resource_group_name
   sku_name            = "S1"
   os_type  = "Linux"
 }
 
 resource "azurerm_app_service" "app" {
   name                = "skdAppService"
-  location            = "West US"
-  resource_group_name = "1-6fcd71ce-playground-sandbox"
+  location            = var.location
+  resource_group_name = var.resource_group_name
   app_service_plan_id = azurerm_service_plan.plan.id
   https_only          = true
 
@@ -50,11 +50,11 @@ resource "azurerm_app_service" "app" {
 
 resource "azurerm_mssql_server" "example" {
   name                         = "skd-sqlserver"
-  resource_group_name          = "1-6fcd71ce-playground-sandbox"
-  location                     = "West US"
+  resource_group_name          = var.resource_group_name
+  location                     = var.location
   version                      = "12.0"
-  administrator_login          = "adminuser"
-  administrator_login_password = "Password1234!"
+  administrator_login          = var.admin_username
+  administrator_login_password = var.admin_password
 }
 
 resource "azurerm_mssql_database" "example" {
