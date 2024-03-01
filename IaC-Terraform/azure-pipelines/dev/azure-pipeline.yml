@@ -11,7 +11,7 @@ stages:
 - stage: 'Dev'
   jobs:
   - job: 'TerraformApplyDev'
-    displayName: 'Terraform Apply - Dev'
+    displayName: 'Terraform Init-Plan-Apply - Azure Resources - Dev'
     steps:
     - checkout: self
     - task: UsePythonVersion@0
@@ -28,7 +28,7 @@ stages:
           terraform init
           terraform plan -var-file=C:\Projects\CloudDevOpsForJavaReact\IaC-Terraform\dev.tfvars
           terraform apply -var-file=C:\Projects\CloudDevOpsForJavaReact\IaC-Terraform\dev.tfvars -auto-approve
-    displayName: 'Terraform Init Plan Apply - Azure Resources - Dev'
+    
 
 - task: PublishPipelineArtifact@1
   inputs:
