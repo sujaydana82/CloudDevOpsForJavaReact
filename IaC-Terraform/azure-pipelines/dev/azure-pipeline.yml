@@ -24,12 +24,11 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-             inlineScript: |
           cd $(System.DefaultWorkingDirectory)/.tf/app_service
-    terraform init
-    terraform plan -var-file=C:\Projects\CloudDevOpsForJavaReact\IaC-Terraform\dev.tfvars
-    terraform apply -var-file=C:\Projects\CloudDevOpsForJavaReact\IaC-Terraform\dev.tfvars -auto-approve
-  displayName: 'Terraform Init Plan Apply - Azure Resources - Dev'
+          terraform init
+          terraform plan -var-file=C:\Projects\CloudDevOpsForJavaReact\IaC-Terraform\dev.tfvars
+          terraform apply -var-file=C:\Projects\CloudDevOpsForJavaReact\IaC-Terraform\dev.tfvars -auto-approve
+    displayName: 'Terraform Init Plan Apply - Azure Resources - Dev'
 
 - task: PublishPipelineArtifact@1
   inputs:
@@ -45,5 +44,3 @@ stages:
     storage: '$(storage_account_name)'  # Use the storage account name from Terraform
     ContainerName: '$(container_name)'  # Use the container name from Terraform
     BlobPrefix: 'tfstateFiles/'
-
-# Add similar jobs for Acc and Prd stages with appropriate variable files and resource configurations
