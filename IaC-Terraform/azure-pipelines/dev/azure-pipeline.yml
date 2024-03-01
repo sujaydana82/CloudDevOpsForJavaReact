@@ -20,7 +20,7 @@ stages:
         addToPath: true
     - task: AzureCLI@2
       inputs:
-        azureSubscription: 'YourAzureServiceConnection'
+        azureSubscription: 'Service-Connection_dev'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
