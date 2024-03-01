@@ -18,7 +18,7 @@ stages:
       inputs:
         versionSpec: '3.x'
         addToPath: true
-        
+
     - task: TerraformInstaller@1
       displayName: 'Install Terraform'
       inputs:
@@ -30,7 +30,7 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          cd $(System.DefaultWorkingDirectory)/.tf/app_service
+          cd $(System.DefaultWorkingDirectory)
           terraform init
           terraform plan -var-file=dev.tfvars
           terraform apply -var-file=dev.tfvars -auto-approve
