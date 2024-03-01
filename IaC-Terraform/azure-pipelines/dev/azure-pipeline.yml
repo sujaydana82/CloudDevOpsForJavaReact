@@ -18,10 +18,12 @@ stages:
       inputs:
         versionSpec: '3.x'
         addToPath: true
+        
     - task: TerraformInstaller@1
-          displayName: 'Install Terraform'
-          inputs:
-            terraformVersion: '1.7.4'  
+      displayName: 'Install Terraform'
+      inputs:
+        terraformVersion: '1.7.4'
+        
     - task: AzureCLI@2
       inputs:
         azureSubscription: $(service-connection)
