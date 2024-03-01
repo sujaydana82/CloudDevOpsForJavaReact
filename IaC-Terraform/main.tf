@@ -1,63 +1,70 @@
-provider "azurerm" {
-  features {}
-  skip_provider_registration = true
-}
-
-variable "image_tag" {
-  description = "The tag of the Docker image"
-  type        = string
-  default     = "latest"
-}
-//resource "azurerm_resource_group" "rg" {
-  //name     = var.resource_group_name
-  //location = var.location
-//}
-
-resource "azurerm_container_registry" "acr" {
-  name                     = "skdContainerRegistry"
+# Storage Account
+resource "azurerm_storage_account" "storage_account" {
+  name                     = var.storage_account_name
   resource_group_name      = var.resource_group_name
   location                 = var.location
-  sku                      = "Basic"
-  admin_enabled            = true
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
 }
 
-resource "azurerm_service_plan" "plan" {
-  name                = "skdAppServicePlan"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  sku_name            = "S1"
-  os_type  = "Linux"
+# Container
+resource "azurerm_storage_container" "container" {
+  name                  = var.container_name
+  storage_account_name  = azurerm_storage_account.storage_account.name
+  container_access_type = "private"
 }
 
-resource "azurerm_app_service" "app" {
-  name                = "skdAppService"
+# App Service Plan
+resource "azurerm_app_service_plan" "app_service_plan" {
+  name                = var.app_service_plan_name
   location            = var.location
   resource_group_name = var.resource_group_name
-  app_service_plan_id = azurerm_service_plan.plan.id
-  https_only          = true
-
-  site_config {
-    linux_fx_version = "DOCKER|${azurerm_container_registry.acr.login_server}/myapp:${var.image_tag}"
-    always_on        = true
-  }
-
-  app_settings = {
-    "DOCKER_REGISTRY_SERVER_URL" = "https://${azurerm_container_registry.acr.login_server}"
-    "DOCKER_REGISTRY_SERVER_USERNAME" = azurerm_container_registry.acr.admin_username
-    "DOCKER_REGISTRY_SERVER_PASSWORD" = azurerm_container_registry.acr.admin_password
+  kind                = "Windows"
+  sku {
+    tier = "Basic"
+    size = "B1"
   }
 }
 
-resource "azurerm_mssql_server" "example" {
-  name                         = "skd-sqlserver"
+# App Service
+resource "azurerm_app_service" "app_service" {
+  name                = var.app_service_name
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  app_service_plan_id = azurerm_app_service_plan.app_service_plan.id
+}
+
+# Container Registry
+resource "azurerm_container_registry" "container_registry" {
+  name                = var.container_registry_name
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  sku                 = "Basic"
+}
+
+# SQL Server
+resource "azurerm_sql_server" "sql_server" {
+  name                         = var.sql_server_name
   resource_group_name          = var.resource_group_name
   location                     = var.location
   version                      = "12.0"
-  administrator_login          = var.admin_username
-  administrator_login_password = var.admin_password
+  administrator_login          = "myadmin"
+  administrator_login_password = "P@ssw0rd!"
 }
 
-resource "azurerm_mssql_database" "example" {
-  name       = "skd-sqldb"
-  server_id  = azurerm_mssql_server.example.id
+# SQL Database
+resource "azurerm_sql_database" "sql_database" {
+  name                = var.sql_database_name
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_sql_server.sql_server.name
+  edition             = "Standard"
+  collation           = "SQL_Latin1_General_CP1_CI_AS"
+  max_size_gb         = 1
+}
+
+# Application Insights
+resource "azurerm_application_insights" "app_insights" {
+  name                = var.app_insights_name
+  resource_group_name = var.resource_group_name
+  application_type    = "web"
 }
