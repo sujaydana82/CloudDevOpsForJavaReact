@@ -1,6 +1,12 @@
 trigger:
   none
 
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  - group: 'terraform-variables'
+
 stages:
 - stage: Cleanup
   jobs:
