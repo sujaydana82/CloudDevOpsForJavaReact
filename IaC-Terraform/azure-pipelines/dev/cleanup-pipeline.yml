@@ -1,0 +1,31 @@
+trigger:
+  none
+
+stages:
+- stage: Cleanup
+  jobs:
+  - job: DestroyResources
+    displayName: 'Destroy Resources'
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+
+    - task: TerraformInstaller@1
+      displayName: 'Install Terraform'
+      inputs:
+        terraformVersion: '1.7.4'
+
+    - task: AzureCLI@2
+      displayName: 'Run Terraform destroy'
+      inputs:
+        azureSubscription: $(AzureSubscription)
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          cd $(System.DefaultWorkingDirectory)/IaC-Terraform
+          terraform init
+          terraform destroy -var-file=dev.tfvars -auto-approve
