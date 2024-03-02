@@ -1,5 +1,5 @@
-resource_group_name = "1-a3a54dbb-playground-sandbox"
-location = "East US"
+resource_group_name = "1-225f997f-playground-sandbox"
+location = "West US"
 storage_account_name = "skdstorageaccount"
 container_name = "skdcontainer"
 app_service_name = "skdappservice"
