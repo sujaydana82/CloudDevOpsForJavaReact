@@ -1,5 +1,6 @@
 provider "azurerm" {
   features {}
+  skip_provider_registration = true
 }
 # Storage Account
 resource "azurerm_storage_account" "storage_account" {
