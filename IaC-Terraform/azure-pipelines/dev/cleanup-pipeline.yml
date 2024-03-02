@@ -35,3 +35,4 @@ stages:
           cd $(System.DefaultWorkingDirectory)/IaC-Terraform
           terraform init
           terraform destroy -var-file=dev.tfvars -auto-approve
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
