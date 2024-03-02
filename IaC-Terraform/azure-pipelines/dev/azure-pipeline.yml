@@ -31,12 +31,12 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
-          cd $(System.DefaultWorkingDirectory)/IaC-Terraform
+          cd $(System.DefaultWorkingDirectory)/CloudDevOpsForJavaReact/IaC-Terraform
           ls -la  # Optional: List files in the directory for troubleshooting
           terraform init
           terraform plan -var-file=dev.tfvars
           terraform apply -var-file=dev.tfvars -auto-approve
-        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/CloudDevOpsForJavaReact/IaC-Terraform'
     
     - task: PublishPipelineArtifact@1
       inputs:
