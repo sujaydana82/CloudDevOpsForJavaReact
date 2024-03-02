@@ -40,13 +40,13 @@ stages:
     
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service/*.tfstate''
+        targetPath: '$(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service/*.tfstate'
         artifact: 'tfstateFiles'
         publishLocation: 'pipeline'
 
     - task: AzureFileCopy@4
       inputs:
-        SourcePath: '$(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service/*.tfstate''
+        SourcePath: '$(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service/*.tfstate'
         azureSubscription: '$(Service-Connection)'
         Destination: 'AzureBlob'
         storage: '$(storage_account_name)'  
