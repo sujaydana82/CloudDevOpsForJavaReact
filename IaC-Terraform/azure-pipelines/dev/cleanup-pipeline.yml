@@ -22,7 +22,7 @@ stages:
     - task: AzureCLI@2
       displayName: 'Run Terraform destroy'
       inputs:
-        azureSubscription: $(AzureSubscription)
+        azureSubscription: $(Service-Connection)
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
