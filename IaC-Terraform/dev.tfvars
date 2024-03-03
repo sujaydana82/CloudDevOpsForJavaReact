@@ -1,4 +1,4 @@
-resource_group_name = "1-8defe9ab-playground-sandbox"
+resource_group_name = "1-b13b093c-playground-sandbox"
 location = "East US"
 storage_account_name = "skdstorageaccount"
 container_name = "skdcontainer"
