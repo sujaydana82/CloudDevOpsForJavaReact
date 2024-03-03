@@ -60,24 +60,7 @@ stages:
   jobs:
   - job: 'TerraformDeploy'
     displayName: 'Terraform Deploy'
-    steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '3.x'
-        addToPath: true
-
-    - task: TerraformInstaller@0
-      displayName: 'Install Terraform'
-      inputs:
-        terraformVersion: 'latest'
-
-    - checkout: self
-
-    - task: TerraformTaskV1@0
-      displayName: 'Terraform Init'
-      inputs:
-        command: 'init'
-        
+    steps: 
     - task: TerraformTaskV1@0
       displayName: 'Terraform Apply'
       inputs:
