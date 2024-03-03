@@ -31,7 +31,6 @@ stages:
       inputs:
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
         backendServiceArm: '$(service-connection)'
         backendAzureRmResourceGroupName: '$(resource_group_name)'
         backendAzureRmStorageAccountName: '$(storage_account_name)'
