@@ -30,12 +30,7 @@ stages:
       displayName: 'Terraform Init'
       inputs:
         command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
-        backendServiceArm: '$(service-connection)'
-        backendAzureRmResourceGroupName: '$(resource_group_name)'
-        backendAzureRmStorageAccountName: '$(storage_account_name)'
-        backendAzureRmContainerName: '$(container_name)'
-        backendAzureRmKey: '$(backendkey)'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'     
 
     - task: TerraformTaskV1@0
       displayName: 'Terraform Validate'
