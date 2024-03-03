@@ -1,9 +1,17 @@
 terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "3.15.00"
+    }
+  }
+
+terraform {
   backend "azurerm" {
-    resource_group_name   = "1-8defe9ab-playground-sandbox"
-    storage_account_name  = "skdstorageaccount"
-    container_name        = "skdcontainer"
-    key                   = "terraform.tfstate"
+    resource_group_name   = var.resource_group_name
+    storage_account_name  = va.storage_account
+    container_name        = var.container_name
+    key                   = var.backendkey
   }
 }
 

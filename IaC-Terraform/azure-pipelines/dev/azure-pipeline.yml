@@ -6,62 +6,86 @@ pool:
 
 variables:
 - group: 'terraform-variables'
+  
 
 stages:
-- stage: 'Dev'
+- stage: 'TfValidatePlan'
+  displayName: 'Terraform Validate and Plan'
   jobs:
-  - job: 'TerraformApplyDev'
-    displayName: 'Terraform Init-Plan-Apply - Azure Resources - Dev'
+  - job: 'TerraformValidatePlan'
+    displayName: 'Terraform Validate and Plan'
     steps:
-    - checkout: self
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '3.x'
         addToPath: true
 
-    - task: TerraformInstaller@1
+    - task: TerraformInstaller@0
       displayName: 'Install Terraform'
       inputs:
-        terraformVersion: '1.7.4'
-    
-    # Initialize Terraform backend with reconfigure
-    - powershell: |
-       terraform init -reconfigure
-      displayName: 'Terraform Init - Reconfigure Backend'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
-    
-    - task: AzureCLI@2
-      displayName: 'Run Terraform commands'
+        terraformVersion: 'latest'
+
+    - checkout: self
+
+    - task: TerraformTaskV1@0
+      displayName: 'Terraform Init'
       inputs:
-        azureSubscription: $(service-connection)
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          cd $(System.DefaultWorkingDirectory)/IaC-Terraform
-          ls -la  # Optional: List files in the directory for troubleshooting
-          terraform plan -var-file=dev.tfvars
-          terraform apply -var-file=dev.tfvars -auto-approve
+        command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        backendServiceArm: '$(service-connection)'
+        backendAzureRmResourceGroupName: '$(resource_group_name)'
+        backendAzureRmStorageAccountName: '$(storage_account_name)'
+        backendKey: '$(backendkey)'
 
-    - powershell: |
-          Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/IaC-Terraform" -Recurse -Filter "*.tfstate" | Format-Table -AutoSize
-      displayName: 'List .tfstate files'
-    
-    - task: PublishPipelineArtifact@1
+    - task: TerraformTaskV1@0
+      displayName: 'Terraform Validate'
       inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
-        artifact: 'tfstateFiles'
-        publishLocation: 'pipeline'
-        artifactName: 'tfstateFiles'
-        includeRootFolder: false
-        
+        command: 'validate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        environmentServiceNameAzureRM: '$(service-connection)'
 
-    - task: AzureFileCopy@4
+    - task: TerraformTaskV1@0
+      displayName: 'Terraform Plan'
       inputs:
-        # Specify the path to the artifact containing the .tfstate files
-        SourcePath: '$(Pipeline.Workspace)/tfstateFiles'
-        azureSubscription: '$(Service-Connection)'
-        Destination: 'AzureBlob'
-        storage: '$(storage_account_name)'
-        ContainerName: '$(container_name)'
-        BlobPrefix: '$(Build.BuildId)'
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        environmentServiceNameAzureRM: '$(service-connection)'
+        commandOptions: '-var-file=dev.tfvars'
+
+- stage: 'TfDeploy'
+  displayName: 'Terraform Deploy'
+  dependsOn: 'TfValidatePlan'
+  condition: succeeded('TfValidatePlan')
+  jobs:
+  - job: 'TerraformDeploy'
+    displayName: 'Terraform Deploy'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+
+    - task: TerraformInstaller@0
+      displayName: 'Install Terraform'
+      inputs:
+        terraformVersion: 'latest'
+
+    - checkout: self
+
+    - task: TerraformTaskV1@0
+      displayName: 'Terraform Init'
+      inputs:
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        backendServiceArm: '$(service-connection)'
+        backendAzureRmResourceGroupName: '$(resource_group_name)'
+        backendAzureRmStorageAccountName: '$(storage_account_name)'
+        backendKey: '$(backendkey)'
+
+    - task: TerraformTaskV1@0
+      displayName: 'Terraform Apply'
+      inputs:
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        environmentServiceNameAzureRM: '$(service-connection)'
+        commandOptions: '-auto-approve -var-file=dev.tfvars'
