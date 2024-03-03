@@ -5,12 +5,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  service-connection: "Service-Connection_dev"
-  resource_group_name: "1-b13b093c-playground-sandbox"
-  storage_account_name: "skdstorageaccount"
-  container_name: "skdcontainer"
-  backendkey: "terraform.tfstate"
-
+ - group: 'terraform-variables' 
 
 stages:
 - stage: 'TfValidatePlan'
@@ -31,7 +26,7 @@ stages:
 
     - checkout: self
 
-    - task: TerraformTaskV1@0
+    - task: TerraformTaskV2@2
       displayName: 'Terraform Init'
       inputs:
         command: 'init'
