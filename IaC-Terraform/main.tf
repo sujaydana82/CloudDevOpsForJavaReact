@@ -1,15 +1,15 @@
-provider "azurerm" {
-  features {}
-  skip_provider_registration = true
-}
-
 terraform {
   backend "azurerm" {
-    resource_group_name   = var.resource_group_name
-    storage_account_name  = var.storage_account_name
-    container_name        = var.container_name
+    resource_group_name   = "1-8defe9ab-playground-sandbox"
+    storage_account_name  = "skdstorageaccount"
+    container_name        = "skdcontainer"
     key                   = "terraform.tfstate"
   }
+}
+
+provider "azurerm" {
+  features {}
+  # skip_provider_registration = true
 }
 
 # Storage Account

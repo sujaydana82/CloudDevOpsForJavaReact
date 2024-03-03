@@ -44,21 +44,25 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
 
     - powershell: |
-       Set-Location -Path $(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service
-       Get-ChildItem -Filter *.tfstate | Format-Table -AutoSize
-      displayName: 'List .tfstate files'
+          Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/IaC-Terraform" -Recurse -Filter "*.tfstate" | Format-Table -AutoSize
+        displayName: 'List .tfstate files'
     
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service/*.tfstate'
+        targetPath: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
         artifact: 'tfstateFiles'
         publishLocation: 'pipeline'
+        artifactName: 'tfstateFiles'
+        includeRootFolder: false
+        # Specify the path to the .tfstate files
+        targetPath: '**/*.tfstate'
 
     - task: AzureFileCopy@4
       inputs:
-        SourcePath: '$(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service/*.tfstate'
+        # Specify the path to the artifact containing the .tfstate files
+        SourcePath: '$(Pipeline.Workspace)/tfstateFiles'
         azureSubscription: '$(Service-Connection)'
         Destination: 'AzureBlob'
-        storage: '$(storage_account_name)'  
-        ContainerName: '$(container_name)'  
-        BlobPrefix: 'tfstateFiles/'
+        storage: '$(storage_account_name)'
+        ContainerName: '$(container_name)'
+        BlobPrefix: '$(Build.BuildId)'
