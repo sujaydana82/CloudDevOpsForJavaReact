@@ -1,11 +1,10 @@
-trigger:
-- none
+trigger: none
 
 pool:
   vmImage: 'windows-latest'
 
 variables:
-  - group: 'terraform-variables'
+- group: 'terraform-variables'
 
 stages:
 - stage: 'Dev'
@@ -37,20 +36,21 @@ stages:
           terraform plan -var-file=dev.tfvars
           terraform apply -var-file=dev.tfvars -auto-approve
         workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+
     - powershell: |
-       Set-Location -Path $(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service
-       Get-ChildItem -Filter *.tfstate | Format-Table -AutoSize
+       Set-Location -Path $(System.DefaultWorkingDirectory)/IaC-Terraform
+       Get-ChildItem -Filter "terraform.tfstate" -Recurse | Format-Table -AutoSize
       displayName: 'List .tfstate files'
     
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service/*.tfstate'
+        targetPath: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
         artifact: 'tfstateFiles'
         publishLocation: 'pipeline'
 
     - task: AzureFileCopy@4
       inputs:
-        SourcePath: '$(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service/*.tfstate'
+        SourcePath: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
         azureSubscription: '$(Service-Connection)'
         Destination: 'AzureBlob'
         storage: '$(storage_account_name)'  

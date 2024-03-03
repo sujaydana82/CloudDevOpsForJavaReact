@@ -2,6 +2,16 @@ provider "azurerm" {
   features {}
   skip_provider_registration = true
 }
+
+terraform {
+  backend "azurerm" {
+    resource_group_name   = var.resource_group_name
+    storage_account_name  = var.storage_account_name
+    container_name        = var.container_name
+    key                   = "terraform.tfstate"
+  }
+}
+
 # Storage Account
 resource "azurerm_storage_account" "storage_account" {
   name                     = var.storage_account_name
