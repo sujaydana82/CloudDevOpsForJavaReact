@@ -54,8 +54,7 @@ stages:
         publishLocation: 'pipeline'
         artifactName: 'tfstateFiles'
         includeRootFolder: false
-        # Specify the path to the .tfstate files
-        targetPath: '**/*.tfstate'
+        
 
     - task: AzureFileCopy@4
       inputs:
