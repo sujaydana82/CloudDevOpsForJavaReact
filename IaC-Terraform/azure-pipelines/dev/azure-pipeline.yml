@@ -8,11 +8,10 @@ variables:
  - group: 'terraform-variables' 
 
 stages:
-- stage: 'TfValidatePlan'
-  displayName: 'Terraform Validate and Plan'
+- stage: 'Dev'
   jobs:
-  - job: 'TerraformValidatePlan'
-    displayName: 'Terraform Validate and Plan'
+  - job: 'TerraformApplyDev'
+    displayName: 'Terraform Init-Plan-Apply - Azure Resources - Dev'
     steps:
     - task: UsePythonVersion@0
       inputs:
@@ -53,19 +52,6 @@ stages:
         environmentServiceNameAzureRM: '$(service-connection)'
         commandOptions: '-var-file=dev.tfvars'
 
-- stage: 'TfDeploy'
-  displayName: 'Terraform Deploy'
-  dependsOn: 'TfValidatePlan'
-  condition: succeeded('TfValidatePlan')
-  jobs:
-  - job: 'TerraformDeploy'
-    displayName: 'Terraform Deploy'
-    steps:
-    - task: TerraformInstaller@0
-      displayName: 'Install Terraform'
-      inputs:
-        terraformVersion: 'latest'
-         
     - task: TerraformTaskV1@0
       displayName: 'Terraform Apply'
       inputs:
