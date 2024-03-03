@@ -1,4 +1,5 @@
-trigger: none
+trigger:
+- none
 
 pool:
   vmImage: 'windows-latest'
@@ -22,7 +23,13 @@ stages:
       displayName: 'Install Terraform'
       inputs:
         terraformVersion: '1.7.4'
-        
+    
+    # Initialize Terraform backend with reconfigure
+    - powershell: |
+       terraform init -reconfigure
+      displayName: 'Terraform Init - Reconfigure Backend'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+    
     - task: AzureCLI@2
       displayName: 'Run Terraform commands'
       inputs:
@@ -32,25 +39,24 @@ stages:
         inlineScript: |
           cd $(System.DefaultWorkingDirectory)/IaC-Terraform
           ls -la  # Optional: List files in the directory for troubleshooting
-          terraform init
           terraform plan -var-file=dev.tfvars
           terraform apply -var-file=dev.tfvars -auto-approve
         workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
 
     - powershell: |
-       Set-Location -Path $(System.DefaultWorkingDirectory)/IaC-Terraform
-       Get-ChildItem -Filter "terraform.tfstate" -Recurse | Format-Table -AutoSize
+       Set-Location -Path $(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service
+       Get-ChildItem -Filter *.tfstate | Format-Table -AutoSize
       displayName: 'List .tfstate files'
     
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        targetPath: '$(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service/*.tfstate'
         artifact: 'tfstateFiles'
         publishLocation: 'pipeline'
 
     - task: AzureFileCopy@4
       inputs:
-        SourcePath: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        SourcePath: '$(System.DefaultWorkingDirectory)/IaC-Terraform/.tf/app_service/*.tfstate'
         azureSubscription: '$(Service-Connection)'
         Destination: 'AzureBlob'
         storage: '$(storage_account_name)'  
