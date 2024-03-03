@@ -27,8 +27,8 @@ stages:
 
     - script: |
         terraform import azurerm_storage_account.storage_account /subscriptions/$(subscription-id)/resourceGroups/$(resource_group_name)/providers/Microsoft.Storage/storageAccounts/$(storage_account_name)
-      displayName: 'Import existing storage account into Terraform state
-
+      displayName: 'Import existing storage account into Terraform state'
+    
     - task: TerraformTaskV2@2
       displayName: 'Terraform Init'
       inputs:
