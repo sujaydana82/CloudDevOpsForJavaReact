@@ -45,7 +45,7 @@ stages:
 
     - powershell: |
           Get-ChildItem -Path "$(System.DefaultWorkingDirectory)/IaC-Terraform" -Recurse -Filter "*.tfstate" | Format-Table -AutoSize
-        displayName: 'List .tfstate files'
+      displayName: 'List .tfstate files'
     
     - task: PublishPipelineArtifact@1
       inputs:
