@@ -35,6 +35,7 @@ stages:
         backendServiceArm: '$(service-connection)'
         backendAzureRmResourceGroupName: '$(resource_group_name)'
         backendAzureRmStorageAccountName: '$(storage_account_name)'
+        backendAzureRmContainerName: '$(container_name)'
         backendKey: '$(backendkey)'
 
     - task: TerraformTaskV1@0
