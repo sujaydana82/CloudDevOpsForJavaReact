@@ -20,7 +20,7 @@ variable "container_name" {
 
 variable "backendkey" {
   type    = string
-  default = ""<storage account key>"
+  default = "<storage account key>"
 }
 
 variable "app_service_name" {
