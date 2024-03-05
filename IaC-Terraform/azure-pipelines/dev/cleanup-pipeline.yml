@@ -2,7 +2,7 @@ trigger:
   none
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   - group: 'terraform-variables'
@@ -12,8 +12,6 @@ stages:
   jobs:
   - job: DestroyResources
     displayName: 'Destroy Resources'
-    pool:
-      vmImage: 'windows-latest'
     steps:
     - task: UsePythonVersion@0
       inputs:
