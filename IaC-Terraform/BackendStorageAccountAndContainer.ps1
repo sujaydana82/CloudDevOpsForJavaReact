@@ -1,4 +1,5 @@
-﻿az login
+﻿# login to Azure
+az login
 
 
 # Variables
