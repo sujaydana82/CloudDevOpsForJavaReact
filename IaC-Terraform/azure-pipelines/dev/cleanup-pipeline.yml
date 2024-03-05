@@ -8,7 +8,7 @@ variables:
   - group: 'terraform-variables'
 
 stages:
-- stage: Cleanup-Dev
+- stage: CleanupDev
   jobs:
   - job: DestroyResources
     displayName: 'Destroy Resources'
