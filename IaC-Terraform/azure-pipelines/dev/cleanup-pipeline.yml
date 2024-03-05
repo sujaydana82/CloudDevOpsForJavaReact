@@ -35,23 +35,7 @@ stages:
         backendAzureRmStorageAccountName: '$(storage_account_name)'
         backendAzureRmContainerName: '$(container_name)'
         backendAzureRmKey: '$(backendkey)'
-     
-
-    - task: TerraformTaskV1@0
-      displayName: 'Terraform Validate'
-      inputs:
-        command: 'validate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
-        environmentServiceNameAzureRM: '$(service-connection)'
-
-    - task: TerraformTaskV1@0
-      displayName: 'Terraform Plan'
-      inputs:
-        command: 'plan'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
-        environmentServiceNameAzureRM: '$(service-connection)'
-        commandOptions: '-var-file=dev.tfvars'   
-
+      
     - task: TerraformTaskV1@0
       displayName: 'Terraform Destroy'
       inputs:
