@@ -18,19 +18,44 @@ stages:
         versionSpec: '3.x'
         addToPath: true
 
-    - task: TerraformInstaller@1
+    - task: TerraformInstaller@0
       displayName: 'Install Terraform'
       inputs:
-        terraformVersion: '1.7.4'
+        terraformVersion: 'latest'
 
-    - task: AzureCLI@2
-      displayName: 'Run Terraform destroy'
+    - checkout: self
+
+    - task: TerraformTaskV2@2
+      displayName: 'Terraform Init'
       inputs:
-        azureSubscription: $(Service-Connection)
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          cd $(System.DefaultWorkingDirectory)/IaC-Terraform
-          terraform init
-          terraform destroy -var-file=dev.tfvars -auto-approve
+        command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        backendServiceArm: '$(service-connection)'
+        backendAzureRmResourceGroupName: '$(resource_group_name)'
+        backendAzureRmStorageAccountName: '$(storage_account_name)'
+        backendAzureRmContainerName: '$(container_name)'
+        backendAzureRmKey: '$(backendkey)'
+     
+
+    - task: TerraformTaskV1@0
+      displayName: 'Terraform Validate'
+      inputs:
+        command: 'validate'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        environmentServiceNameAzureRM: '$(service-connection)'
+
+    - task: TerraformTaskV1@0
+      displayName: 'Terraform Plan'
+      inputs:
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        environmentServiceNameAzureRM: '$(service-connection)'
+        commandOptions: '-var-file=dev.tfvars'   
+
+    - task: TerraformTaskV1@0
+      displayName: 'Terraform Destroy'
+      inputs:
+        command: 'Destroy'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
+        environmentServiceNameAzureRM: '$(service-connection)'
+        commandOptions: '-auto-approve -var-file=dev.tfvars'
