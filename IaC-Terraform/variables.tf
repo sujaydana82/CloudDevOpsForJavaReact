@@ -8,16 +8,6 @@ variable "location" {
   default = "<region>"
 }
 
-variable "storage_account_name" {
-  type    = string
-  default = "<storage account name>"
-}
-
-variable "container_name" {
-  type    = string
-  default = "<blob storage container name>"
-}
-
 variable "backendkey" {
   type    = string
   default = "<storage account key>"

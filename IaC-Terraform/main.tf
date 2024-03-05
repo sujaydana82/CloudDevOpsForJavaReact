@@ -2,39 +2,14 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.15.00"
+      version = "3.0.0"
     }
-  }
-}
-
-terraform {
-  backend "azurerm" {
-    resource_group_name   = var.resource_group_name
-    storage_account_name  = var.storage_account_name
-    container_name        = var.container_name
-    key                   = var.backendkey
   }
 }
 
 provider "azurerm" {
   features {}
   skip_provider_registration = true
-}
-
-# Storage Account
-resource "azurerm_storage_account" "storage_account" {
-  name                     = var.storage_account_name
-  resource_group_name      = var.resource_group_name
-  location                 = var.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
-
-# Container
-resource "azurerm_storage_container" "container" {
-  name                  = var.container_name
-  storage_account_name  = azurerm_storage_account.storage_account.name
-  container_access_type = "private"
 }
 
 # App Service Plan

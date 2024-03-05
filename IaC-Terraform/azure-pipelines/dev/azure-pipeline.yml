@@ -50,12 +50,7 @@ stages:
         command: 'plan'
         workingDirectory: '$(System.DefaultWorkingDirectory)/IaC-Terraform'
         environmentServiceNameAzureRM: '$(service-connection)'
-        commandOptions: '-var-file=dev.tfvars'
-
-    - script: |
-        cd $(System.DefaultWorkingDirectory)/IaC-Terraform
-        terraform import azurerm_storage_account.storage_account /subscriptions/$(subscription-id)/resourceGroups/$(resource_group_name)/providers/Microsoft.Storage/storageAccounts/$(storage_account_name)
-      displayName: 'Import existing storage account into Terraform state'    
+        commandOptions: '-var-file=dev.tfvars'   
 
     - task: TerraformTaskV1@0
       displayName: 'Terraform Apply'
