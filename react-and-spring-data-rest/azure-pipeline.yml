@@ -5,7 +5,7 @@ pool:
   name: 'BRUNAL_LTP_4_SD'
 
 variables:
-  dockerRegistryServiceConnection: 'ACR-Service-Connection'
+  dockerRegistryServiceConnection: 'ARM-Service-Connection'
   dockerfilePath: 'react-and-spring-data-rest\dockerfile'
   imageName: 'react-and-spring-data-rest'
   containerRegistry: 'skdcontainerregistry.azurecr.io'
