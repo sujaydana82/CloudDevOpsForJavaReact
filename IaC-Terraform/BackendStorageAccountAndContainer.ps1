@@ -4,7 +4,7 @@ az login
 
 # Variables
 $subscriptionID = "80ea84e8-afce-4851-928a-9e2219724c69"
-$resourceGroupName="1-67344a1c-playground-sandbox"
+$resourceGroupName="1-ee9043e9-playground-sandbox"
 $storageAccountName="skdstorageaccount"
 $location = "eastus"
 $containerName = "skdcontainer"
