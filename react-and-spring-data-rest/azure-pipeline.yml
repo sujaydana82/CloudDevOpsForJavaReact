@@ -7,6 +7,7 @@ pool:
 variables:
   dockerRegistryServiceConnection: 'DockerHub-Service-Connection'
   dockerfilePath: 'react-and-spring-data-rest/dockerfile'
+  dockerrepository: 'devopsskd'
   imageName: 'react-and-spring-data-rest'
   dockerImageTag: '$(Build.BuildId)'
 
@@ -26,7 +27,7 @@ steps:
   displayName: 'Build and push an image to container registry'
   inputs:
     containerRegistry: '$(dockerRegistryServiceConnection)'
-    repository: 'your-dockerhub-username/$(imageName)'  # Replace 'your-dockerhub-username' with your Docker Hub username
+    repository: '$ockerrepository/$(imageName)'  
     command: 'buildAndPush'
     Dockerfile: '$(dockerfilePath)'
     tags: |
