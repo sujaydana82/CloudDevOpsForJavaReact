@@ -18,6 +18,7 @@ steps:
     jdkSourceOption: PreInstalled
     
 - script: |
+    cd $(System.DefaultWorkingDirectory)/react-and-spring-data-rest
     mvn clean package
   displayName: 'Build the application'
 
