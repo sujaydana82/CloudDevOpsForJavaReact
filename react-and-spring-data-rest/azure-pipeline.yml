@@ -39,4 +39,4 @@ steps:
   inputs:
     azureSubscription: '$(azureSubscription)'
     appName: '$(appName)'
-    containers: '$(containerRegistry)/$(imageName):$(dockerImageTag)'
+    containers: 'devopsskd/$(imageName):$(dockerImageTag)'
