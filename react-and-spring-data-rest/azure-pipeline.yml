@@ -1,0 +1,28 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  dockerRegistryServiceConnection: 'ACR-Service-Connection'
+  dockerfilePath: 'react-and-spring-data-rest\dockerfile'
+  imageName: 'react-and-spring-data-rest'
+  containerRegistry: 'skdcontainerregistry.azurecr.io'
+  dockerImageTag: '$(Build.BuildId)'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
+
+- task: Docker@2
+  displayName: 'Build and push an image to container registry'
+  inputs:
+    containerRegistry: '$(dockerRegistryServiceConnection)'
+    repository: '$(containerRegistry)/$(imageName)'
+    command: 'buildAndPush'
+    Dockerfile: '$(dockerfilePath)'
+    tags: |
+      $(dockerImageTag)
