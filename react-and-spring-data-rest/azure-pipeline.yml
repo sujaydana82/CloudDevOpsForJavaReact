@@ -8,26 +8,23 @@ variables:
   dockerRegistryServiceConnection: 'DockerHub-Service-Connection'
   dockerfilePath: 'react-and-spring-data-rest/dockerfile'
   imageName: 'react-and-spring-data-rest'
-  containerRegistry: 'skdcontainerregistry.azurecr.io'
   dockerImageTag: '$(Build.BuildId)'
 
 steps:
-- task: UseJavaVersion@1
+- task: JavaToolInstaller@0
   inputs:
     versionSpec: '11'
-    architecture: 'x64'
     jdkArchitectureOption: 'x64'
 
 - script: |
     mvn clean package
   displayName: 'Build the application'
 
-
 - task: Docker@2
   displayName: 'Build and push an image to container registry'
   inputs:
     containerRegistry: '$(dockerRegistryServiceConnection)'
-    repository: '$(containerRegistry)/$(imageName)'
+    repository: 'your-dockerhub-username/$(imageName)'  # Replace 'your-dockerhub-username' with your Docker Hub username
     command: 'buildAndPush'
     Dockerfile: '$(dockerfilePath)'
     tags: |
