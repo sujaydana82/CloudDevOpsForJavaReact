@@ -6,6 +6,7 @@ pool:
 
 variables:
   dockerRegistryServiceConnection: 'DockerHub-Service-Connection'
+  azureSubscription: 'ARM-Service-Connection'
   dockerfilePath: 'react-and-spring-data-rest/dockerfile'
   imageName: 'react-and-spring-data-rest'
   dockerImageTag: '$(Build.BuildId)'
@@ -36,6 +37,6 @@ steps:
 - task: AzureWebAppContainer@1
   displayName: 'Deploy to Azure App Service'
   inputs:
-    azureSubscription: 'P6-Real Hands-On Labs'
+    azureSubscription: '$(azureSubscription)'
     appName: '$(appName)'
     containers: '$(containerRegistry)/$(imageName):$(dockerImageTag)'
