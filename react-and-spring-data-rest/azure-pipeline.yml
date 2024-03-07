@@ -10,7 +10,7 @@ variables:
   dockerfilePath: 'react-and-spring-data-rest/dockerfile'
   imageName: 'react-and-spring-data-rest'
   dockerImageTag: '$(Build.BuildId)'
-  appname: 'skdappservice'
+  appName: 'skdappservice'
 
 steps:
 - task: JavaToolInstaller@0
