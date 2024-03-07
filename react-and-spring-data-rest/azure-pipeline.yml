@@ -6,7 +6,7 @@ pool:
 
 variables:
   dockerRegistryServiceConnection: 'DockerHub-Service-Connection'
-  dockerfilePath: 'react-and-spring-data-rest\dockerfile'
+  dockerfilePath: 'react-and-spring-data-rest/dockerfile'
   imageName: 'react-and-spring-data-rest'
   containerRegistry: 'skdcontainerregistry.azurecr.io'
   dockerImageTag: '$(Build.BuildId)'
