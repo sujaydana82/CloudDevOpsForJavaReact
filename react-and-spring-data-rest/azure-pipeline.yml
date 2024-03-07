@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'BRUNAL_LTP_4_SD'
 
 variables:
   dockerRegistryServiceConnection: 'ACR-Service-Connection'
