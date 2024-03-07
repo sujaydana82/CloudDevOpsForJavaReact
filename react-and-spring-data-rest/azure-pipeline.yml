@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  name: 'BRUNAL_LTP_4_SD'
+  name: 'SKD-Self-Hosted-Agent'
 
 variables:
   dockerRegistryServiceConnection: 'ACR-Service-Connection'
