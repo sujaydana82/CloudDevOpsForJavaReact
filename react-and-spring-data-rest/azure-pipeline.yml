@@ -9,6 +9,7 @@ variables:
   dockerfilePath: 'react-and-spring-data-rest/dockerfile'
   imageName: 'react-and-spring-data-rest'
   dockerImageTag: '$(Build.BuildId)'
+  appname: 'skdappservice'
 
 steps:
 - task: JavaToolInstaller@0
@@ -31,3 +32,10 @@ steps:
     Dockerfile: '$(dockerfilePath)'
     tags: |
       $(dockerImageTag)
+
+- task: AzureWebAppContainer@1
+  displayName: 'Deploy to Azure App Service'
+  inputs:
+    azureSubscription: 'P6-Real Hands-On Labs'
+    appName: '$(appName)'
+    containers: '$(containerRegistry)/$(imageName):$(dockerImageTag)'
