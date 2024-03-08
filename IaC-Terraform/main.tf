@@ -91,7 +91,7 @@ resource "azurerm_sql_firewall_rule" "allow_source_ip" {
 }
 
 resource "azurerm_mssql_virtual_network_rule" "network-rule" {
-  name                 = var.sql_server_vnet_rule_name
+  name                 = "Allow-sql-connection"
   server_id            = azurerm_sql_server.sql_server.id
   subnet_id            = azurerm_subnet.subnet.id
 }
