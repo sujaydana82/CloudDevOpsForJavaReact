@@ -65,7 +65,7 @@ resource "azurerm_sql_database" "sql_database" {
 resource "azurerm_virtual_network" "virtual_network" {
   name                = var.virtual_network_name
   resource_group_name = var.resource_group_name
-  address_space       = ["10.0.0.0/24"]
+  address_space       = ["10.0.0.0/16"]
   location            = var.location
 }
 
@@ -73,7 +73,7 @@ resource "azurerm_subnet" "subnet" {
   name                 = var.subnet_name
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.virtual_network_name
-  address_prefixes     = ["10.0.0.0/26"]
+  address_prefixes     = ["10.0.1.0/24"]
 }
 
 resource "azurerm_network_security_group" "nsg" {
@@ -83,7 +83,7 @@ resource "azurerm_network_security_group" "nsg" {
 }
 
 resource "azurerm_sql_firewall_rule" "allow_source_ip" {
-  name                = var.source_ip
+  name                = "allow_source_ip"
   resource_group_name = var.resource_group_name
   server_name         = var.sql_database_name
   start_ip_address    = "95.128.93.215"
