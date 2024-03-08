@@ -17,12 +17,8 @@ resource "azurerm_service_plan" "app_service_plan" {
   name                = var.app_service_plan_name
   location            = var.location
   resource_group_name = var.resource_group_name
-  kind                = "linux"
-  reserved            = "true"
-  sku {
-    tier = "Basic"
-    size = "B1"
-  }
+  os_type             = "Linux"
+  sku_name            = "B1"
 }
 
 # App Service
@@ -42,7 +38,7 @@ resource "azurerm_container_registry" "container_registry" {
 }
 
 # SQL Server
-resource "azurerm_sql_server" "sql_server" {
+resource "azurerm_mssql_server" "sql_server" {
   name                         = var.sql_server_name
   resource_group_name          = var.resource_group_name
   location                     = var.location
@@ -86,18 +82,8 @@ resource "azurerm_sql_firewall_rule" "allow_source_ip" {
   name                = "allow_source_ip"
   resource_group_name = var.resource_group_name
   server_name         = var.sql_database_name
-  
-  security_rule {
-    name                       = "AllowAll"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+  start_ip_address    = "95.128.93.215"
+  end_ip_address      = "95.128.93.215"
 }
 
 resource "azurerm_mssql_virtual_network_rule" "network-rule" {
