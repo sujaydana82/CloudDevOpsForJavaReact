@@ -43,9 +43,9 @@ variable "virtual_network_name" {
   description = "<virtual network name>"
 }
 
-variable "vnet_name" {
+variable "subnet_name" {
   type        = string
-  description = "<vnet name>"
+  description = "<subnet name>"
 }
 
 variable "nsg_name" {
