@@ -79,6 +79,7 @@ resource "azurerm_subnet" "subnet" {
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.virtual_network_name
   address_prefixes     = ["10.0.1.0/24"]
+  depends_on           = [azurerm_virtual_network.virtual_network]
 }
 
 resource "azurerm_network_security_group" "nsg" {
@@ -92,6 +93,7 @@ resource "azurerm_mssql_firewall_rule" "allow_source_ip" {
   server_id           = "/subscriptions/2213e8b1-dbc7-4d54-8aff-b5e315df5e5b/resourceGroups/1-d3a9e1ba-playground-sandbox/providers/Microsoft.Sql/servers/${var.sql_server_name}"
   start_ip_address    = "95.128.93.215"
   end_ip_address      = "95.128.93.215"
+  depends_on          = [azurerm_mssql_server.sql_server]
 }
 
 resource "azurerm_mssql_virtual_network_rule" "network-rule" {
