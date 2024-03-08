@@ -79,6 +79,7 @@ resource "azurerm_subnet" "subnet" {
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.virtual_network_name
   address_prefixes     = ["10.0.1.0/24"]
+  service_endpoints    = ["Microsoft.Sql"]
   depends_on           = [azurerm_virtual_network.virtual_network]
 }
 
