@@ -78,10 +78,9 @@ resource "azurerm_network_security_group" "nsg" {
   location            = var.location
 }
 
-resource "azurerm_sql_firewall_rule" "allow_source_ip" {
+resource "azurerm_mssql_firewall_rule" "allow_source_ip" {
   name                = "allow_source_ip"
-  resource_group_name = var.resource_group_name
-  server_name         = var.sql_database_name
+  server_id           = var.sql_database_name
   start_ip_address    = "95.128.93.215"
   end_ip_address      = "95.128.93.215"
 }
@@ -89,7 +88,8 @@ resource "azurerm_sql_firewall_rule" "allow_source_ip" {
 resource "azurerm_mssql_virtual_network_rule" "network-rule" {
   name                 = "Allow-sql-connection"
   server_id            = azurerm_sql_server.sql_server.id
-  subnet_id            = azurerm_subnet.subnet.id
+  start_ip_address     = "95.128.93.215"
+  end_ip_address       = "95.128.93.215"
 }
 
 
