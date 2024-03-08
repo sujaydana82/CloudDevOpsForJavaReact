@@ -13,12 +13,17 @@ provider "azurerm" {
 }
 
 # App Service Plan
-resource "azurerm_service_plan" "app_service_plan" {
+resource "azurerm_app_service_plan" "app_service_plan" {
   name                = var.app_service_plan_name
   location            = var.location
   resource_group_name = var.resource_group_name
-  os_type             = "Linux"
-  sku_name            = "B1"
+  kind                = "Linux"
+  reserved            = true
+
+  sku {
+    tier = "Basic"
+    size = "B1"
+  }
 }
 
 # App Service
@@ -27,6 +32,10 @@ resource "azurerm_app_service" "app_service" {
   location            = var.location
   resource_group_name = var.resource_group_name
   app_service_plan_id = azurerm_app_service_plan.app_service_plan.id
+
+  site_config {
+    linux_fx_version = "DOCKER|devopsskd/react-and-spring-data-rest:latest"
+  }
 }
 
 # Container Registry
@@ -87,9 +96,8 @@ resource "azurerm_mssql_firewall_rule" "allow_source_ip" {
 
 resource "azurerm_mssql_virtual_network_rule" "network-rule" {
   name                 = "Allow-sql-connection"
-  server_id            = azurerm_sql_server.sql_server.id
-  start_ip_address     = "95.128.93.215"
-  end_ip_address       = "95.128.93.215"
+  server_id            = azurerm_mssql_server.sql_server.id
+  subnet_id            = azurerm_subnet.subnet.id
 }
 
 
