@@ -3,8 +3,8 @@ az login
 
 
 # Variables
-$subscriptionID = "0cfe2870-d256-4119-b0a3-16293ac11bdc"
-$resourceGroupName="1-931f7868-playground-sandbox"
+$subscriptionID = "2213e8b1-dbc7-4d54-8aff-b5e315df5e5b"
+$resourceGroupName="1-d3a9e1ba-playground-sandbox"
 $storageAccountName="skdstorageaccount"
 $location = "eastus"
 $containerName = "skdcontainer"
