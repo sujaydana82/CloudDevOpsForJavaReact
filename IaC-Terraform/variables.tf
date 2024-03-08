@@ -52,7 +52,7 @@ variable "nsg_name" {
   type        = string
   description = "<nsg name>"
 }
-
+  
 variable "app_insights_name" {
   type    = string
   default = "<appinsights name>"
