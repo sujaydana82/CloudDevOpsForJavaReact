@@ -53,16 +53,6 @@ variable "nsg_name" {
   description = "<nsg name>"
 }
 
-variable "source_ip" {
-  type        = string
-  description = "<source ip>"
-}
-
-variable "sql_server_vnet_rule_name" {
-  type        = string
-  description = "<sql server vnet rule name>"
-}
-
 variable "app_insights_name" {
   type    = string
   default = "<appinsights name>"
