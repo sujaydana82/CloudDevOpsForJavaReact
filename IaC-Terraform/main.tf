@@ -56,11 +56,45 @@ resource "azurerm_sql_database" "sql_database" {
   name                = var.sql_database_name
   resource_group_name = var.resource_group_name
   location            = var.location
-  server_name         = azurerm_sql_server.sql_server.name
   edition             = "Standard"
   collation           = "SQL_Latin1_General_CP1_CI_AS"
   max_size_gb         = 1
 }
+
+resource "azurerm_virtual_network" "virtual_network" {
+  name                = var.virtual_network_name
+  resource_group_name = var.resource_group_name
+  address_space       = ["10.0.0.0/24"]
+  location            = var.location
+}
+
+resource "azurerm_subnet" "subnet" {
+  name                 = var.subnet_name
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = var.virtual_network_name
+  address_prefixes     = ["10.0.0.0/26"]
+}
+
+resource "azurerm_network_security_group" "nsg" {
+  name                = var.nsg_name
+  resource_group_name = var.resource_group_name
+  location            = var.location
+}
+
+resource "azurerm_sql_firewall_rule" "allow_source_ip" {
+  name                = var.source_ip
+  resource_group_name = var.resource_group_name
+  server_name         = var.sql_database_name
+  start_ip_address    = "95.128.93.215"
+  end_ip_address      = "95.128.93.215"
+}
+
+resource "azurerm_sql_server_virtual_network_rule" "network-rule" {
+  server_id            = azurerm_sql_server.sql_server.id
+  resource_group_name  = var.resource_group_name
+  virtual_network_subnet_id = azurerm_subnet.subnet.id
+}
+
 
 # Application Insights
 resource "azurerm_application_insights" "app_insights" {
