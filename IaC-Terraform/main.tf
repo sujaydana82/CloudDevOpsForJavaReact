@@ -90,6 +90,7 @@ resource "azurerm_sql_firewall_rule" "allow_source_ip" {
 }
 
 resource "azurerm_sql_server_virtual_network_rule" "network-rule" {
+  name                 = var.sql_server_vnet_rule_name
   server_id            = azurerm_sql_server.sql_server.id
   resource_group_name  = var.resource_group_name
   virtual_network_subnet_id = azurerm_subnet.subnet.id

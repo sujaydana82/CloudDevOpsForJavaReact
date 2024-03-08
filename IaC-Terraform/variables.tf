@@ -38,6 +38,31 @@ variable "sql_database_name" {
   default = "<database name>"
 }
 
+variable "virtual_network_name" {
+  type        = string
+  description = "<virtual network name>"
+}
+
+variable "vnet_name" {
+  type        = string
+  description = "<vnet name>"
+}
+
+variable "nsg_name" {
+  type        = string
+  description = "<nsg name>"
+}
+
+variable "source_ip" {
+  type        = string
+  description = "<source ip>"
+}
+
+variable "sql_server_vnet_rule_name" {
+  type        = string
+  description = "<sql server vnet rule name>"
+}
+
 variable "app_insights_name" {
   type    = string
   default = "<appinsights name>"
