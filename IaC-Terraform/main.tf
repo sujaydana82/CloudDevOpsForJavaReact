@@ -94,8 +94,6 @@ resource "azurerm_mssql_virtual_network_rule" "network-rule" {
   name                 = var.sql_server_vnet_rule_name
   server_id            = azurerm_sql_server.sql_server.id
   subnet_id            = azurerm_subnet.subnet.id
-  virtual_network_name = azurerm_virtual_network.virtual_network.name
-
 }
 
 
