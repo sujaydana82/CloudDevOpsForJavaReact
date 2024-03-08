@@ -1,5 +1,5 @@
 resource_group_name = "1-d3a9e1ba-playground-sandbox"
-location = "East US"
+location = "West US"
 backendkey = "terraform.tfstate"
 app_service_plan_name = "skdappserviceplan"
 app_service_name = "skdappservice"
