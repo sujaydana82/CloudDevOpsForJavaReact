@@ -13,7 +13,7 @@ provider "azurerm" {
 }
 
 # App Service Plan
-resource "azurerm_app_service_plan" "app_service_plan" {
+resource "azurerm_service_plan" "app_service_plan" {
   name                = var.app_service_plan_name
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -86,8 +86,18 @@ resource "azurerm_sql_firewall_rule" "allow_source_ip" {
   name                = "allow_source_ip"
   resource_group_name = var.resource_group_name
   server_name         = var.sql_database_name
-  start_ip_address    = "95.128.93.215"
-  end_ip_address      = "95.128.93.215"
+  
+  security_rule {
+    name                       = "AllowAll"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 }
 
 resource "azurerm_mssql_virtual_network_rule" "network-rule" {
