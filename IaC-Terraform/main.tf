@@ -51,7 +51,7 @@ resource "azurerm_postgresql_server" "postgresql_server" {
   name                         = var.postgresql_server_name
   resource_group_name          = var.resource_group_name
   location                     = var.location
-  sku_name                     = "B_Gen5_2"
+  sku_name                     = "GP_Gen5_2"
   storage_mb                   = 5120
   administrator_login          = "psqladmin"
   administrator_login_password = "H@Sh1CoR3!"
@@ -66,6 +66,7 @@ resource "azurerm_postgresql_database" "postgresql_database" {
   server_name         = var.postgresql_server_name
   charset             = "UTF8"
   collation           = "en_US.UTF8"
+  depends_on          = [azurerm_postgresql_server.postgresql_server]
 
 }
 
@@ -75,6 +76,7 @@ resource "azurerm_postgresql_firewall_rule" "firewall_rule" {
   server_name         = var.postgresql_server_name
   start_ip_address    = "95.98.135.169"
   end_ip_address      = "95.98.135.169"
+  depends_on          = [azurerm_postgresql_server.postgresql_server]
 }
 
 resource "azurerm_log_analytics_workspace" "workspace" {
