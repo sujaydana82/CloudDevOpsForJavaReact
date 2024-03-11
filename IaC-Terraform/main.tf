@@ -69,7 +69,7 @@ resource "azurerm_postgresql_database" "postgresql_database" {
 
 }
 
-resource "azurerm_postgresql_firewall_rule" "firewall_rule" resource{
+resource "azurerm_postgresql_firewall_rule" "firewall_rule" {
   name                = "office"
   resource_group_name = var.resource_group_name
   server_name         = var.postgresql_server_name
@@ -77,7 +77,7 @@ resource "azurerm_postgresql_firewall_rule" "firewall_rule" resource{
   end_ip_address      = "95.98.135.169"
 }
 
-resource "azurerm_log_analytics_workspace" "workspace" resource{
+resource "azurerm_log_analytics_workspace" "workspace" {
   name                = var.analytics_workspace
   location            = var.location
   resource_group_name = var.resource_group_name
