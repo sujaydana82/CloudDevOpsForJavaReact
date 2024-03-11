@@ -46,68 +46,50 @@ resource "azurerm_container_registry" "container_registry" {
   sku                 = "Basic"
 }
 
-# SQL Server
-resource "azurerm_mssql_server" "sql_server" {
-  name                         = var.sql_server_name
+# PostgreSQL Server
+resource "azurerm_postgresql_server" "postgresql_server" {
+  name                         = var.postgresql_server_name
   resource_group_name          = var.resource_group_name
   location                     = var.location
-  version                      = "12.0"
-  administrator_login          = "myadmin"
-  administrator_login_password = "P@ssw0rd!"
+  sku_name                     = "Standard_B2s"
+  storage_mb                   = 5120
+  administrator_login          = "psqladmin"
+  administrator_login_password = "H@Sh1CoR3!"
+  version                      = "9.5"
+  ssl_enforcement_enabled      = true
 }
 
-# SQL Database
-resource "azurerm_sql_database" "sql_database" {
-  name                = var.sql_database_name
+# PostgreSQL Database
+resource "azurerm_postgresql_database" "postgresql_database" {
+  name                = var.postgresql_database_name
   resource_group_name = var.resource_group_name
-  server_name         = azurerm_mssql_server.sql_server.name
-  location            = var.location
-  edition             = "Standard"
-  collation           = "SQL_Latin1_General_CP1_CI_AS"
-  max_size_gb         = 1
+  server_name         = var.postgresql_server_name
+  charset             = "UTF8"
+  collation           = "en_US.UTF8"
+
 }
 
-resource "azurerm_virtual_network" "virtual_network" {
-  name                = var.virtual_network_name
+resource "azurerm_postgresql_firewall_rule" "firewall_rule" resource{
+  name                = "office"
   resource_group_name = var.resource_group_name
-  address_space       = ["10.0.0.0/16"]
+  server_name         = var.postgresql_server_name
+  start_ip_address    = "95.98.135.169"
+  end_ip_address      = "95.98.135.169"
+}
+
+resource "azurerm_log_analytics_workspace" "workspace" resource{
+  name                = var.analytics_workspace
   location            = var.location
-}
-
-resource "azurerm_subnet" "subnet" {
-  name                 = var.subnet_name
-  resource_group_name  = var.resource_group_name
-  virtual_network_name = var.virtual_network_name
-  address_prefixes     = ["10.0.1.0/24"]
-  service_endpoints    = ["Microsoft.Sql"]
-  depends_on           = [azurerm_virtual_network.virtual_network]
-}
-
-resource "azurerm_network_security_group" "nsg" {
-  name                = var.nsg_name
   resource_group_name = var.resource_group_name
-  location            = var.location
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
 }
-
-resource "azurerm_mssql_firewall_rule" "allow_source_ip" {
-  name                = "allow_source_ip"
-  server_id           = "/subscriptions/2213e8b1-dbc7-4d54-8aff-b5e315df5e5b/resourceGroups/1-d3a9e1ba-playground-sandbox/providers/Microsoft.Sql/servers/${var.sql_server_name}"
-  start_ip_address    = "95.128.93.215"
-  end_ip_address      = "95.128.93.215"
-  depends_on          = [azurerm_mssql_server.sql_server]
-}
-
-resource "azurerm_mssql_virtual_network_rule" "network-rule" {
-  name                 = "Allow-sql-connection"
-  server_id            = azurerm_mssql_server.sql_server.id
-  subnet_id            = azurerm_subnet.subnet.id
-}
-
 
 # Application Insights
 resource "azurerm_application_insights" "app_insights" {
   name                = var.app_insights_name
   resource_group_name = var.resource_group_name
   location            = var.location
+  workspace_id        = azurerm_log_analytics_workspace.workspace.id
   application_type    = "web"
 }

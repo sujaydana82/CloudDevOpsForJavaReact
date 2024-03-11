@@ -2,11 +2,11 @@
 az login
 
 #Variables
-$subscriptionID = "80ea84e8-afce-4851-928a-9e2219724c69"
-$resourceGroupName="1-a339fb94-playground-sandbox"
-$keyvault = "skdkeyvault"
-$location = "eastus"
-$serviceprincipalID = "25b9da33-90dc-4535-92b0-1faaebace493"
+$subscriptionID = "2213e8b1-dbc7-4d54-8aff-b5e315df5e5b"
+$resourceGroupName="1-fb6c20c4-playground-sandbox"
+$keyvault = "myskdkeyvault"
+$location = "South Central US"
+$serviceprincipalID = "b87108ae-e983-439b-b02d-ad6a8881562e"
 
 
 # Set the default subscription (if you have multiple subscriptions)
@@ -21,7 +21,5 @@ az keyvault set-policy --name $keyvault --object-id $serviceprincipalID --secret
 
 #Add Secrets to Key Vault: 
 
-az keyvault secret set --vault-name $keyvault --name "SqlServer-Admin-Login" --value "skdsqladmin"
-az keyvault secret set --vault-name $keyvault --name "SqlServer-Admin-Password" --value "skdsqlP@ssw0rd!"
-az keyvault secret set --vault-name $keyvault --name "ContainerRegistry-Admin-Username" --value "skdcradmin"
-az keyvault secret set --vault-name $keyvault --name "ContainerRegistry-Admin-Password" --value "skdcrP@ssw0rd!"
+az keyvault secret set --vault-name $keyvault --name "psqladmin-Login" --value "psqladmin"
+az keyvault secret set --vault-name $keyvault --name "psqladmin-Password" --value "H@Sh1CoR3!"
