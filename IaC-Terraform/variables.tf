@@ -28,29 +28,19 @@ variable "container_registry_name" {
   default = "<container registry name>"
 }
 
-variable "sql_server_name" {
+variable "postgresql_server_name" {
   type    = string
   default = "<dbserver name>"
 }
 
-variable "sql_database_name" {
+variable "postgresql_database" {
   type    = string
   default = "<database name>"
 }
 
-variable "virtual_network_name" {
-  type        = string
-  description = "<virtual network name>"
-}
-
-variable "subnet_name" {
-  type        = string
-  description = "<subnet name>"
-}
-
-variable "nsg_name" {
-  type        = string
-  description = "<nsg name>"
+variable "analytics_workspace" {
+  type    = string
+  default = "<analytics workspace name>"
 }
   
 variable "app_insights_name" {
