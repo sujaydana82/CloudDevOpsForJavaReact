@@ -33,7 +33,7 @@ variable "postgresql_server_name" {
   default = "<dbserver name>"
 }
 
-variable "postgresql_database" {
+variable "postgresql_database_name" {
   type    = string
   default = "<database name>"
 }
