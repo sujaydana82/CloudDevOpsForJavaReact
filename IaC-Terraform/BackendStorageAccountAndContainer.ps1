@@ -3,10 +3,10 @@ az login
 
 
 # Variables
-$subscriptionID = "80ea84e8-afce-4851-928a-9e2219724c69"
-$resourceGroupName="1-f1361ab8-playground-sandbox"
-$storageAccountName="myskdstorageaccount"
-$location = "South Central US"
+$subscriptionID = "2213e8b1-dbc7-4d54-8aff-b5e315df5e5b"
+$resourceGroupName="1-596c4903-playground-sandbox"
+$storageAccountName="mystorageaccount"
+$location = "West US"
 $containerName = "myskdcontainer"
 
 # Set the default subscription (if you have multiple subscriptions)

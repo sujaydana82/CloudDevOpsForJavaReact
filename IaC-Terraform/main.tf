@@ -85,6 +85,7 @@ resource "azurerm_log_analytics_workspace" "workspace" {
   resource_group_name = var.resource_group_name
   sku                 = "PerGB2018"
   retention_in_days   = 30
+  daily_quota_gb      = 2
 }
 
 # Application Insights
@@ -94,4 +95,5 @@ resource "azurerm_application_insights" "app_insights" {
   location            = var.location
   workspace_id        = azurerm_log_analytics_workspace.workspace.id
   application_type    = "web"
+  retention_in_days   = 30
 }

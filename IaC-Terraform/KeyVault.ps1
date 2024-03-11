@@ -4,9 +4,9 @@ az login
 #Variables
 $subscriptionID = "80ea84e8-afce-4851-928a-9e2219724c69"
 $resourceGroupName="1-f1361ab8-playground-sandbox"
-$keyvault = "myskdkeyvault1"
-$location = "South Central US"
-$serviceprincipalID = "8ee22001-726a-450c-a97f-8f08fea0b6b2"
+$keyvault = "myskdkeyvault"
+$location = "West US"
+$serviceprincipalID = "a1855005-a6ca-460b-985b-afde1703b13d"
 
 
 # Set the default subscription (if you have multiple subscriptions)
