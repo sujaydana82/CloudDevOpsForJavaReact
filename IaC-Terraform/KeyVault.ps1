@@ -1,5 +1,7 @@
 ﻿#Login to azure
+
 az login
+
 
 #Variables
 $subscriptionID = "80ea84e8-afce-4851-928a-9e2219724c69"
