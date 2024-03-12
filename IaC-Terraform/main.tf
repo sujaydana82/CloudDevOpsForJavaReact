@@ -61,17 +61,16 @@ resource "azurerm_postgresql_flexible_server" "postgresql_server" {
   location                     = var.location
   version                      = "12"
   administrator_login          = "psqladmin"
-  administrator_password = data.azurerm_key_vault_secret.secret.value
-  storage_mb = 32768
-  sku_name = "GP_Standard_D4s_v3"
+  administrator_password       = data.azurerm_key_vault_secret.secret.value
+  storage_mb                   = 32768
+  sku_name                     = "GP_Standard_D4s_v3"
  
 }
 
 # PostgreSQL Database
 resource "azurerm_postgresql_flexible_server_database" "postgresql_database" {
   name                = var.postgresql_database_name
-  resource_group_name = var.resource_group_name
-  server_name         = var.postgresql_server_name
+  server_id           = azurerm_postgresql_flexible_server.postgresql_server.id
   charset             = "UTF8"
   collation           = "en_US.UTF8"
   depends_on          = [azurerm_postgresql_flexible_server.postgresql_server]
@@ -80,8 +79,7 @@ resource "azurerm_postgresql_flexible_server_database" "postgresql_database" {
 
 resource "azurerm_postgresql_flexible_server_firewall_rule" "firewall_rule" {
   name                = "office"
-  resource_group_name = var.resource_group_name
-  server_name         = var.postgresql_server_name
+  server_id           = azurerm_postgresql_flexible_server.postgresql_server.id
   start_ip_address    = "95.98.135.169"
   end_ip_address      = "95.98.135.169"
   depends_on          = [azurerm_postgresql_flexible_server.postgresql_server]
