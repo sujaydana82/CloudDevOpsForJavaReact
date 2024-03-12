@@ -1,4 +1,4 @@
-resource_group_name = "1-84d7c8f9-playground-sandbox"
+resource_group_name = "1-3d9e323d-playground-sandbox"
 location = "East US"
 backendkey = "terraform.tfstate"
 my_secret  = "adminPassword"

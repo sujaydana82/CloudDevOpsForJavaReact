@@ -23,15 +23,9 @@ docker run -p 8080:8080 --name javabackendcontainer javabackendimage:1.0
 ✨ create frontend container locally
 docker run -p 3000:3000 --name reactfrontendcontainer reactfrontendimage:1.0
 
-✨ Add below lines to package.json file
+✨ Changes made in application code base.
+package.json,application.properties, pom.xml
 
-"scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "watch": "webpack --watch -d --output ./target/classes/static/built/bundle.js"
-}
 
 ✨ create public folder
  created a public folder inside react-and-spring-data-rest 
@@ -41,4 +35,4 @@ docker run -p 3000:3000 --name reactfrontendcontainer reactfrontendimage:1.0
 ✨ Through this pipeline It will create docker image and deploy to container registry and then it will create and run container in azure app service.
 
 
-✨ updated application.properties and pom.xml 
+

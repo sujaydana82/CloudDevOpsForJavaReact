@@ -4,11 +4,11 @@ az login
 
 
 #Variables
-$subscriptionID = "80ea84e8-afce-4851-928a-9e2219724c69"
-$resourceGroupName="1-f1361ab8-playground-sandbox"
-$keyvault = "myskdkeyvault"
-$location = "West US"
-$serviceprincipalID = "a1855005-a6ca-460b-985b-afde1703b13d"
+$subscriptionID = "your_subscription_id"
+$resourceGroupName="your_resource_group_name"
+$keyvault = "your_key_vault"
+$location = "your_location"
+$serviceprincipalID = "your_service_principal_id"
 
 
 # Set the default subscription (if you have multiple subscriptions)
@@ -24,9 +24,9 @@ az keyvault set-policy --name $keyvault --object-id $serviceprincipalID --secret
 #Add Secrets to Key Vault: 
 
 az keyvault secret set --vault-name $keyvault --name "adminLogin" --value "psqladmin"
-az keyvault secret set --vault-name $keyvault --name "adminPassword" --value "H@Sh1CoR3!"
+az keyvault secret set --vault-name $keyvault --name "adminPassword" --value "yourPassword"
 
-az keyvault secret set --vault-name $keyvault  --name JDBC-CS --value "jdbc:postgresql://myskddbserver.postgres.database.azure.com:5432/myskddatabase?user=psqladmin@myskddbserver&password=H@Sh1CoR3!&sslmode=require"
+az keyvault secret set --vault-name $keyvault  --name JDBC-CS --value "jdbc:postgresql://myskddbserver.postgres.database.azure.com:5432/myskddatabase?user=psqladmin@{yourservername}&password=H@Sh1CoR3!&sslmode=require"
 
 
 

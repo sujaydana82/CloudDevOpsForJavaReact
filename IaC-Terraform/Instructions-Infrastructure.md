@@ -1,5 +1,5 @@
 ✨ Forking the Repository
-- Go to the GitHub repository of the solution: GitHub Repository.
+- Go to the GitHub repository of the solution: [GitHub Repository](https://github.com/sujaydana82/CloudDevOpsForJavaReact).
 - Click on the "Fork" button in the top-right corner to create a copy of the repository in your GitHub account.
 
 ✨ Install azure cli on local machine
@@ -19,7 +19,7 @@
 ✨ Create a folder name IaC-Terraform inside in azure repo "CloudDevOpsForJavaReact"
 
 
-✨ Create azure-pipeline and cleanup-pipeline 
+✨ Create [Infrastructure Pipeline](https://github.com/sujaydana82/CloudDevOpsForJavaReact/tree/main/IaC-Terraform/dev/azure-pipeline.yml) and [Cleanup Pipeline](https://github.com/sujaydana82/CloudDevOpsForJavaReact/tree/main/IaC-Terraform/dev/cleanup-pipeline.yml) 
 
 
 ✨  azure-pipeline will create 8 azure resources (app service plan, app service, container registry, workspace, application insights, postgresql flexible server, postgresql flexible database, postgresql firewall rule)
@@ -27,7 +27,7 @@
 
 ✨  After pipeline is deployed, Terraform.state file will be saved in storageaccount/container
 
-✨ Create tables in postegresql database through psql cli tool. set environment variable for psql tool
+✨ Created tables in postegresql database through psql cli tool. set environment variable for psql tool
 
 psql "host=myskddbserver.postgres.database.azure.com port=5432 dbname=myskddatabase user=psqladmin@myskddbserver password=H@Sh1CoR3! sslmode=require"
 
@@ -46,3 +46,7 @@ CREATE TABLE Manager (
     description VARCHAR(255)
 );
 
+✨ Monitoring and Auditing
+    - Set up monitoring and auditing for the infrastructure resources using the monitoring and logging tools provided by Azure.
+    - Created App-Insights to monitor data
+    - Enabled diagnostic-settings to check logs if required in case of any app-service failures
