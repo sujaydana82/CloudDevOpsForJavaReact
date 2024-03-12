@@ -23,8 +23,8 @@ az keyvault set-policy --name $keyvault --object-id $serviceprincipalID --secret
 
 #Add Secrets to Key Vault: 
 
-az keyvault secret set --vault-name $keyvault --name "psqladmin-Login" --value "psqladmin"
-az keyvault secret set --vault-name $keyvault --name "psqladmin-Password" --value "H@Sh1CoR3!"
+az keyvault secret set --vault-name $keyvault --name "adminLogin" --value "psqladmin"
+az keyvault secret set --vault-name $keyvault --name "adminPassword" --value "H@Sh1CoR3!"
 
 az keyvault secret set --vault-name $keyvault  --name JDBC-CS --value "jdbc:postgresql://myskddbserver.postgres.database.azure.com:5432/myskddatabase?user=psqladmin@myskddbserver&password=H@Sh1CoR3!&sslmode=require"
 

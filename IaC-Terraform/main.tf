@@ -15,7 +15,7 @@ provider "azurerm" {
 # Import keyvault
 
 data "azurerm_key_vault_secret" "secret" {
-  name         = "var.my_secret"
+  name         = var.my_secret
   key_vault_id = "/subscriptions/80ea84e8-afce-4851-928a-9e2219724c69/resourceGroups/1-84d7c8f9-playground-sandbox/providers/Microsoft.KeyVault/vaults/mysdkeyvault"
 }
 
@@ -61,7 +61,7 @@ resource "azurerm_postgresql_flexible_server" "postgresql_server" {
   location                     = var.location
   version                      = "12"
   administrator_login          = "psqladmin"
-  administrator_login_password = "data.azurerm_key_vault_secret.secret.value"
+  administrator_login_password = data.azurerm_key_vault_secret.my_secret.value
   storage_mb = 32768
   sku_name = "GP_Standard_D4s_v3"
  

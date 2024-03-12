@@ -6,10 +6,10 @@ Use a version control system like Git. You can use GitHub, or Azure Repos.
 - Install docker desktop on your machine and login with your docker account
 - Create a repository on GitHub
 - Clone the repository to your local machine
-- Create front end and backend docker files , dockerfile.frontend and dockerfile.backend
+- Create a docker file for front react end and backend java code, 
 - open cmd prompt and create images locally
 
-cd to directory where dockerfile.frontend and dockerfile.backend are located
+cd to directory where dockerfile is located
 
 # create backend image locally
 docker build -t javabackendimage:1.0 -f dockerfile.backend . 
