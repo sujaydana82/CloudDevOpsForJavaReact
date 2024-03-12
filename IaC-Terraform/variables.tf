@@ -13,6 +13,10 @@ variable "backendkey" {
   default = "<storage account key>"
 }
 
+variable "my_secret" {
+  description = "My secret from Key Vault"
+}
+
 variable "app_service_name" {
   type    = string
   default = "<appservice name>"
