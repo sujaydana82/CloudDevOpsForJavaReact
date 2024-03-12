@@ -19,7 +19,7 @@
 ✨ Create a folder name IaC-Terraform inside in azure repo "CloudDevOpsForJavaReact"
 
 
-✨ Create [Infrastructure Pipeline](https://github.com/sujaydana82/CloudDevOpsForJavaReact/tree/main/IaC-Terraform/dev/azure-pipeline.yml) and [Cleanup Pipeline](https://github.com/sujaydana82/CloudDevOpsForJavaReact/tree/main/IaC-Terraform/dev/cleanup-pipeline.yml) 
+✨ Create [Infrastructure Pipeline](https://github.com/sujaydana82/CloudDevOpsForJavaReact/blob/main/IaC-Terraform/azure-pipelines/dev/azure-pipeline.yml) and [Cleanup Pipeline](https://github.com/sujaydana82/CloudDevOpsForJavaReact/blob/main/IaC-Terraform/azure-pipelines/dev/cleanup-pipeline.yml) 
 
 
 ✨  azure-pipeline will create 8 azure resources (app service plan, app service, container registry, workspace, application insights, postgresql flexible server, postgresql flexible database, postgresql firewall rule)
