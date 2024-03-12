@@ -27,3 +27,22 @@
 
 ✨  After pipeline is deployed, Terraform.state file will be saved in storageaccount/container
 
+✨ Create tables in postegresql database through psql cli tool. set environment variable for psql tool
+
+psql "host=myskddbserver.postgres.database.azure.com port=5432 dbname=myskddatabase user=psqladmin@myskddbserver password=H@Sh1CoR3! sslmode=require"
+
+CREATE TABLE employee (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    description VARCHAR(100),
+    manager VARCHAR(50)
+);
+
+CREATE TABLE Manager (
+    id SERIAL PRIMARY KEY,
+    firstName VARCHAR(255),
+    lastName VARCHAR(255),
+    description VARCHAR(255)
+);
+

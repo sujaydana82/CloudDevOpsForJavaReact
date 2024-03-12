@@ -55,35 +55,37 @@ resource "azurerm_container_registry" "container_registry" {
 }
 
 # PostgreSQL Server
-resource "azurerm_postgresql_flexible_server" "postgresql_server" {
+resource "azurerm_postgresql_server" "postgresql_server" {
   name                         = var.postgresql_server_name
   resource_group_name          = var.resource_group_name
   location                     = var.location
-  version                      = "12"
+  sku_name                     = "GP_Gen5_2"
+  storage_mb                   = 5120
   administrator_login          = "psqladmin"
-  administrator_password       = data.azurerm_key_vault_secret.secret.value
-  storage_mb                   = 32768
-  sku_name                     = "GP_Standard_D4s_v3"
+  administrator_login_password = "H@Sh1CoR3!"
+  version                      = "9.5"
   ssl_enforcement_enabled      = true
- 
 }
+
 
 # PostgreSQL Database
-resource "azurerm_postgresql_flexible_server_database" "postgresql_database" {
+resource "azurerm_postgresql_database" "postgresql_database" {
   name                = var.postgresql_database_name
-  server_id           = azurerm_postgresql_flexible_server.postgresql_server.id
+  resource_group_name = var.resource_group_name
+  server_name         = var.postgresql_server_name
   charset             = "UTF8"
   collation           = "en_US.UTF8"
-  depends_on          = [azurerm_postgresql_flexible_server.postgresql_server]
+  depends_on          = [azurerm_postgresql_server.postgresql_server]
 
 }
 
-resource "azurerm_postgresql_flexible_server_firewall_rule" "firewall_rule" {
+resource "azurerm_postgresql_firewall_rule" "firewall_rule" {
   name                = "office"
-  server_id           = azurerm_postgresql_flexible_server.postgresql_server.id
+  resource_group_name = var.resource_group_name
+  server_name         = var.postgresql_server_name
   start_ip_address    = "95.98.135.169"
   end_ip_address      = "95.98.135.169"
-  depends_on          = [azurerm_postgresql_flexible_server.postgresql_server]
+  depends_on          = [azurerm_postgresql_server.postgresql_server]
 }
 
 resource "azurerm_log_analytics_workspace" "workspace" {
