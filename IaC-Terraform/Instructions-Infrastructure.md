@@ -29,7 +29,7 @@
 
 ✨ Created tables in postegresql database through psql cli tool. set environment variable for psql tool
 
-psql "host=myskddbserver.postgres.database.azure.com port=5432 dbname=myskddatabase user=psqladmin@myskddbserver password=H@Sh1CoR3! sslmode=require"
+psql "host=<yourserver>.postgres.database.azure.com port=5432 dbname=<yourdatabase> user=psqladmin@<yourserver> password=<yourpassword> sslmode=require"
 
 CREATE TABLE employee (
     id SERIAL PRIMARY KEY,
