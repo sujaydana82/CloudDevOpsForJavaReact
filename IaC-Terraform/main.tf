@@ -64,6 +64,7 @@ resource "azurerm_postgresql_flexible_server" "postgresql_server" {
   administrator_password       = data.azurerm_key_vault_secret.secret.value
   storage_mb                   = 32768
   sku_name                     = "GP_Standard_D4s_v3"
+  ssl_enforcement_enabled      = true
  
 }
 

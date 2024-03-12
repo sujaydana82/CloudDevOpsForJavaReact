@@ -11,6 +11,9 @@
 ✨ Create a keyvault for storing postgresql administrator credentials and connection string.
 
 
+✨ Make sure you have different Subscriptions across Environments (Dev/Acc/Prod) with their respective Service principals, ACRs, Service Connection etc.
+
+
 ✨ Create configuration filess for Terraform, including main.tf, variables.tf, dev.tvars (for the development environment), and output.tf.
 
 ✨ Create a folder name IaC-Terraform inside in azure repo "CloudDevOpsForJavaReact"

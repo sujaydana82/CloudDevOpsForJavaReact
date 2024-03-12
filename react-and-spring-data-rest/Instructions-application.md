@@ -39,3 +39,6 @@ docker run -p 3000:3000 --name reactfrontendcontainer reactfrontendimage:1.0
 ✨ Create azure-pipeline.yml to deploy in azure apps
 
 ✨ Through this pipeline It will create docker image and deploy to container registry and then it will create and run container in azure app service.
+
+
+✨ updated application.properties and pom.xml 
