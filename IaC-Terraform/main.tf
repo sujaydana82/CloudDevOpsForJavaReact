@@ -61,7 +61,7 @@ resource "azurerm_postgresql_flexible_server" "postgresql_server" {
   location                     = var.location
   version                      = "12"
   administrator_login          = "psqladmin"
-  administrator_login_password = data.azurerm_key_vault_secret.secret.value
+  administrator_password = data.azurerm_key_vault_secret.secret.value
   storage_mb = 32768
   sku_name = "GP_Standard_D4s_v3"
  

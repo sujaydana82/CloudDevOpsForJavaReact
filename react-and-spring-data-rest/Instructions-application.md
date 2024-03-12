@@ -35,3 +35,5 @@ docker run -p 3000:3000 --name reactfrontendcontainer reactfrontendimage:1.0
 
 # create public folder
  created a public folder inside react-and-spring-data-rest 
+
+ # Create azure-pipeline.yml to deploy in azure apps
