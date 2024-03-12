@@ -5,12 +5,12 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  dockerRegistryServiceConnection: 'DockerHub-Service-Connection'
-  azureSubscription: 'ARM-Service-Connection'
+  dockerRegistryServiceConnection: 'your-docker-registry'
+  azureSubscription: 'your-azure-subscription'
   dockerfilePath: 'react-and-spring-data-rest/dockerfile'
   imageName: 'react-and-spring-data-rest'
   dockerImageTag: '$(Build.BuildId)'
-  appName: 'myskdappservice'
+  appName: 'your-app-service-name'
 
 steps:
 - task: JavaToolInstaller@0
