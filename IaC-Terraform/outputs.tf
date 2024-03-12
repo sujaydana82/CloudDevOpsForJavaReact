@@ -7,11 +7,11 @@ output "container_registry_login_server" {
 }
 
 output "postgresql_server_fqdn" {
-  value = azurerm_postgresql_server.postgresql_server.fqdn
+  value = azurerm_postgresql_flexible_server.postgresql_server.fqdn
 }
 
 output "postgresql_database_name" {
-  value = azurerm_postgresql_database.postgresql_database.name
+  value = zurerm_postgresql_flexible_server_database.postgresql_database.name
 }
 
 output "log_analytics_workspace_id" {

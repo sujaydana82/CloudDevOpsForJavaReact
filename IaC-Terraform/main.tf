@@ -17,7 +17,6 @@ provider "azurerm" {
 data "azurerm_key_vault_secret" "secret" {
   name         = "var.my_secret"
   key_vault_id = "/subscriptions/80ea84e8-afce-4851-928a-9e2219724c69/resourceGroups/1-84d7c8f9-playground-sandbox/providers/Microsoft.KeyVault/vaults/mysdkeyvault"
-  version      = "5ab25dcd3c8b4c9dbcf2907c7016e6a5"
 }
 
 
@@ -79,7 +78,7 @@ resource "azurerm_postgresql_flexible_server_database" "postgresql_database" {
 
 }
 
-resource "azurerm_postgresql_firewall_rule" "firewall_rule" {
+resource "azurerm_postgresql_flexible_server_firewall_rule" "firewall_rule" {
   name                = "office"
   resource_group_name = var.resource_group_name
   server_name         = var.postgresql_server_name
