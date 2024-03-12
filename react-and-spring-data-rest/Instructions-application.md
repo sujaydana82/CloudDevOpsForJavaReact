@@ -11,19 +11,19 @@ Use a version control system like Git. You can use GitHub, or Azure Repos.
 
 cd to directory where dockerfile is located
 
-# create backend image locally
+2. create backend image locally
 docker build -t javabackendimage:1.0 -f dockerfile.backend . 
 
-# create frontend image locally
+3. create frontend image locally
 docker build -t reactfrontendimage:1.0 -f dockerfile.frontend . 
 
-# create backend container locally
+4. create backend container locally
 docker run -p 8080:8080 --name javabackendcontainer javabackendimage:1.0
 
-# create frontend container locally
+5. create frontend container locally
 docker run -p 3000:3000 --name reactfrontendcontainer reactfrontendimage:1.0
 
-# Add below lines to package.json file
+6. Add below lines to package.json file
 
 "scripts": {
     "start": "react-scripts start",
@@ -33,9 +33,9 @@ docker run -p 3000:3000 --name reactfrontendcontainer reactfrontendimage:1.0
     "watch": "webpack --watch -d --output ./target/classes/static/built/bundle.js"
 }
 
-# create public folder
+7. create public folder
  created a public folder inside react-and-spring-data-rest 
 
- # Create azure-pipeline.yml to deploy in azure apps
+8. Create azure-pipeline.yml to deploy in azure apps
 
 Through this pipeline It will create docker image and deploy to container registry and then it will create and run container in azure app service.
