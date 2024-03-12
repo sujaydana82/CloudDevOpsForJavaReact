@@ -11,7 +11,7 @@ output "postgresql_server_fqdn" {
 }
 
 output "postgresql_database_name" {
-  value = azurerm_postgresql_server_database.postgresql_database.name
+  value = azurerm_postgresql_database.postgresql_database.name
 }
 
 output "log_analytics_workspace_id" {
