@@ -11,21 +11,14 @@ Use a version control system like Git. You can use GitHub, or Azure Repos.
 
 cd to directory where dockerfile is located
 
-✨ create backend image locally
-docker build -t javabackendimage:1.0 -f dockerfile.backend . 
+✨ create docker image locally
+docker build -t <YourImageName>:1.0 -f dockerfile . 
 
-✨ create frontend image locally
-docker build -t reactfrontendimage:1.0 -f dockerfile.frontend . 
-
-✨ create backend container locally
-docker run -p 8080:8080 --name javabackendcontainer javabackendimage:1.0
-
-✨ create frontend container locally
-docker run -p 3000:3000 --name reactfrontendcontainer reactfrontendimage:1.0
+✨ create docker container locally
+docker run -p 8080:8080 --name javabackendcontainer <YourImageName>:1.0
 
 ✨ Changes made in application code base.
 package.json,application.properties, pom.xml
-
 
 ✨ create public folder
  created a public folder inside react-and-spring-data-rest 
