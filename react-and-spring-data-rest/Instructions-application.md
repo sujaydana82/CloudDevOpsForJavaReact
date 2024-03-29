@@ -12,10 +12,10 @@ Use a version control system like Git. You can use GitHub, or Azure Repos.
 cd to directory where dockerfile is located
 
 ✨ create docker image locally
-docker build -t <YourImageName>:1.0 -f dockerfile . 
+# docker build -t YourImageName:1.0 -f dockerfile . 
 
 ✨ create docker container locally
-docker run -p 8080:8080 --name <YourcontainerName> <YourImageName>:1.0
+# docker run -p 8080:8080 --name YourcontainerName YourImageName:1.0
 
 ✨ Changes made in application code base.
 package.json,application.properties, pom.xml
