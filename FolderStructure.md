@@ -9,7 +9,7 @@
 
 ## ✨	Environment Based Infrastructure As Code (IAC):
 
-### [IaC Codebase](https://github.com/sujaydana82/CloudDevOpsForJavaReact/tree/main/IaC-Terraform/dev)
+### [IaC Codebase](https://github.com/sujaydana82/CloudDevOpsForJavaReact/tree/main/IaC-Terraform)
 
 Here, we are creating following services inside.
 
@@ -29,18 +29,18 @@ Here, we are creating following services inside.
 
 ## ✨	Pipeline:
 
-### ✨ [Infrastructure Pipeline](https://github.com/sujaydana82/CloudDevOpsForJavaReact/tree/main/IaC-Terraform/dev/azure-pipeline.yml)
+### ✨ [Infrastructure Pipeline](https://github.com/sujaydana82/CloudDevOpsForJavaReact/blob/main/IaC-Terraform/azure-pipelines/dev/azure-pipeline.yml)
 - Please create respective Service Connection(Azure Resource Manager)
 - Have state file for each Environment you deploy
 - We can remove environment during runtime as per the requirement.
 - Please create Environments under Pipelines in Azure Devops with approvals to hold the Apply for review.
 
-### ✨ [Cleanup Pipeline](https://github.com/sujaydana82/CloudDevOpsForJavaReact/tree/main/IaC-Terraform/dev/cleanup-pipeline.yml)
+### ✨ [Cleanup Pipeline](https://github.com/sujaydana82/CloudDevOpsForJavaReact/blob/main/IaC-Terraform/azure-pipelines/dev/cleanup-pipeline.yml)
 - This pipeline is used to Cleanup infrastructure based on ResourceGroup.
 - Please create Variable Groups across different Environments.
 - To store client_id, client_secret and subscription_id
 - We can use same Service Connection what we are using for creating infrastructure
 
-### ✨ [Application Pipeline](https://github.com/sujaydana82/CloudDevOpsForJavaReact\react-and-spring-data-rest\azure-pipeline.yml")
+### ✨ [Application Pipeline](https://github.com/sujaydana82/CloudDevOpsForJavaReact/blob/main/react-and-spring-data-rest/azure-pipeline.yml)
 - This pipeline is to build application code and create docker image and push images to ACR
 - Create Service Connection using Docker Registry for each environment as there will be different ACRs and SPs across subscription.
