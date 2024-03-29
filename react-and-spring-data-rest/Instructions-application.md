@@ -15,7 +15,7 @@ cd to directory where dockerfile is located
 docker build -t <YourImageName>:1.0 -f dockerfile . 
 
 ✨ create docker container locally
-docker run -p 8080:8080 --name javabackendcontainer <YourImageName>:1.0
+docker run -p 8080:8080 --name <YourcontainerName> <YourImageName>:1.0
 
 ✨ Changes made in application code base.
 package.json,application.properties, pom.xml
